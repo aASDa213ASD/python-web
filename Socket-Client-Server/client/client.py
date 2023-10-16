@@ -5,7 +5,6 @@ class Client:
     def __init__(self) -> None:
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server_info = self.get_server_address()
-        self.socket.connect((self.server_info["host"], self.server_info["port"]))
         self.prompt()
     
     def get_server_address(self) -> dict:
@@ -27,12 +26,18 @@ class Client:
         self.socket.send(message.encode("UTF-8"))
     
     def prompt(self):
-        message = input("Message to Server: ")
-        self.send_message(message)
+        self.socket.connect((self.server_info["host"], self.server_info["port"]))
+        while True:
+            message = input("Message to Server: ")
+            self.send_message(message)
         
-        print("Waiting for Server response...")
-        response = self.socket.recv(1024).decode("UTF-8")
-        print(f"Server said: {response}")
+            print("Waiting for Server response...")
+            response = self.socket.recv(1024).decode("UTF-8")
+            if response:
+                print(f"Server said: {response}")
+            else:
+                print(f"Server closed the connection.")
+                break
 
 if __name__ == "__main__":
     Client()

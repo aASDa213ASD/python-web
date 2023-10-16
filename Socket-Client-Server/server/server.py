@@ -53,9 +53,9 @@ class Server:
 
     def accept_clients(self) -> None:
         _can_receive: bool = True
+        client_socket, client_address = self.socket.accept()
         while True:
             if _can_receive:
-                client_socket, client_address = self.socket.accept()
                 data = client_socket.recv(1024).decode('utf-8')
 
                 last_message_time = time()
@@ -65,9 +65,13 @@ class Server:
             
             if time() - last_message_time > 5:
                 self.send_response(client_socket, "Thanks for your message.")
-                client_socket.close()
-
                 _can_receive = True
+            
+            if data == "exit":
+                client_socket.close()
+                self.socket.close()
+                break
+        self.say("Shutting down...")
     
 if __name__ == "__main__":
     Server()
