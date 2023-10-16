@@ -27,6 +27,10 @@ class Client:
     
     def prompt(self):
         self.socket.connect((self.server_info["host"], self.server_info["port"]))
+        response = self.socket.recv(1024).decode("UTF-8")
+        if response:
+            print(f"Server said: {response}")
+        
         while True:
             message = input("Message to Server: ")
             self.send_message(message)
