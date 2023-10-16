@@ -36,6 +36,21 @@ class Server:
 
         self.say(f"Launched on {socket.gethostbyname(socket.gethostname())}:{self.port}")
 
+    def send_response(self, client: socket, response: str) -> bool:
+        response_size = len(response.encode("ASCII"))
+        sent_data_size = 0
+
+        while sent_data_size < response_size:
+            sent_data_size += client.send(response.encode("ASCII")[sent_data_size:])
+        
+        if sent_data_size == response_size:
+            self.say("Successfully sent response to client.")
+            return True
+        else:
+            self.say("Error in sending data.")
+        return False
+        
+
     def accept_clients(self) -> None:
         _can_receive: bool = True
         while True:
@@ -43,17 +58,16 @@ class Server:
                 client_socket, client_address = self.socket.accept()
                 data = client_socket.recv(1024).decode('utf-8')
 
-                self.say("Recording message time...")
                 last_message_time = time()
                 _can_receive = False
-                self.say(f"Recorded at {last_message_time}")
 
                 print(f"<{client_socket.getsockname()}> {data} // [{datetime.now().time().strftime('%H:%M:%S')}]")
             
             if time() - last_message_time > 5:
-                self.say("Five seconds past, sending to Client...")
-                client_socket.send(f"Success".encode("ASCII"))
+                self.send_response(client_socket, "Thanks for your message.")
+                client_socket.close()
+
                 _can_receive = True
-            
+    
 if __name__ == "__main__":
     Server()
