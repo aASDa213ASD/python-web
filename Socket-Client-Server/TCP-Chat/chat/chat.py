@@ -1,30 +1,23 @@
+import configparser
 import platform
 import socket
-from datetime import datetime
 from os import system
-from threading import Thread
-from time import time
-import select
+from threading import Event, Thread
 
 
-class ChatUser:
-    def __init__(self, socket, host, name: str) -> None:
-        self.socket = socket
-        self.host = host
-        self.name = name
-
-class Chat:
+class Client:
     def __init__(self) -> None:
-        self.user_list: list = []
+        self.socket: socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server_info: dict = self.get_server_address()
+        self.leave_flag = Event()
+        self.name: str = self.get_name()
         self.clear_console()
-        self.initialize()
 
-        Thread(target=self.accept_users).start()
-        self.manage_clients()
+        if self.connect_to_chat_room():
+            self.listener = Thread(target=self.listen_chat_room)
+            self.listener.start()
+            self.chat()
     
-    def say(self, message: str) -> None:
-        print(f"<{self.__class__.__name__}> {message}")
-        
     def clear_console(self):
         system_platform = platform.system().lower()
 
@@ -35,70 +28,62 @@ class Chat:
         else:
             pass
     
-    def initialize(self) -> None:
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.port: int = 1024
-        self.socket.bind((socket.gethostname(), self.port))
-        self.socket.listen(5)
+    def get_server_address(self) -> dict:
+        config = configparser.ConfigParser()
+        config.read("chat/settings.ini")
 
-        self.say(f"Launched on {socket.gethostbyname(socket.gethostname())}:{self.port}")
+        # Get the server IP and PORT values
+        host = config.get("Server", "host")
+        port = config.getint("Server", "port")
 
-    def send_response(self, client: socket, response: str) -> bool:
-        response_size = len(response.encode("ASCII"))
-        sent_data_size = 0
+        server_info = {
+            "host": host,
+            "port": port
+        }
 
-        while sent_data_size < response_size:
-            try:
-                sent_data_size += client.send(response.encode("ASCII")[sent_data_size:])
-            except Exception:
-                break
-        
-        return True if sent_data_size == response_size else False
+        return server_info
+
+    def get_name(self) -> str:
+        config = configparser.ConfigParser()
+        config.read("chat/settings.ini")
+        name = config.get("User", "name")
+        return name
     
-    def promote_system_message(self, message: str) -> None:
-        for user in self.user_list:
-            self.send_response(user.socket, f"{message}")
+    def send_message(self, message: str):
+        self.socket.send(message.encode("UTF-8"))
     
-    def promote_message(self, sender: ChatUser, message: str) -> None:
-        for user in self.user_list:
-            if user.name != sender.name:
-                self.send_response(user.socket, f"<{sender.name}> {message}")
-
-    def manage_user(self, user: ChatUser) -> None:
+    def connect_to_chat_room(self) -> bool:
+        print(f"Connecting to {self.server_info['host']}:{self.server_info['port']}...")
+        """ Connecting to Chat server """
+        self.socket.connect((self.server_info["host"], self.server_info["port"]))
+        """ Providing Chat server our name """
+        self.send_message(self.name)
+        """ Waiting for approving for Chat server """
+        response = self.socket.recv(1024).decode("UTF-8")
+        return True if response else False
+    
+    def disconnect_from_chat_room(self) -> None:
+        self.socket.close()
+    
+    def listen_chat_room(self) -> None:
+        while not self.leave_flag.is_set():
+            chat_message = self.socket.recv(1024).decode("UTF-8")
+            if chat_message:
+                print(f"{chat_message}")
+    
+    def chat(self):
         while True:
-            try:
-                message = user.socket.recv(1024).decode("UTF-8")
-                print(f"[{datetime.now().time().strftime('%H:%M:%S')}] <{user.name}> {message} // <{user.socket.getsockname()}>")
-                self.promote_message(user, message)
-            except ConnectionResetError:
-                self.promote_system_message(f"{user.name} has left.")
-                print(f"[{datetime.now().time().strftime('%H:%M:%S')}] username has left.")
-                self.user_list.remove(user)
-                break
-                
-    def accept_users(self) -> None:
-        while True:
-            try:
-                client_socket, client_host = self.socket.accept()
-                if client_socket and client_host:
-                    username = client_socket.recv(1024).decode("UTF-8")
-                    self.user_list.append(ChatUser(client_socket, client_host, username))
-                    self.send_response(client_socket, f"1")
-                    self.promote_system_message(f"{username} has joined.")
-                    print(f"[{datetime.now().time().strftime('%H:%M:%S')}] {username} has joined.")
-            except Exception:
-                pass
-    
-    def manage_clients(self) -> None:
-        clients_amount = len(self.user_list)
+            message = input()
+            match (message):
+                case "!clear":
+                    self.clear_console()
+                case "!leave":
+                    self.leave_flag.set()
+                    self.disconnect_from_chat_room()
+                    print(f"<Client> end of !leave")
+                case _:
+                    self.send_message(message)
+        print(f"<Client> Exited main loop")
 
-        for user in self.user_list:
-            Thread(target=self.manage_user, args=(user,)).start()
-
-        while True:
-            if len(self.user_list) > clients_amount:
-                clients_amount = len(self.user_list)
-                Thread(target=self.manage_user, args=(self.user_list[-1],)).start()
-    
 if __name__ == "__main__":
-    Chat()
+    Client()
