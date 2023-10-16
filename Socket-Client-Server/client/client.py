@@ -23,13 +23,15 @@ class Client:
 
         return server_info
     
-    def send_message(self, message):
+    def send_message(self, message: str):
         self.socket.send(message.encode("UTF-8"))
     
     def prompt(self):
         message = input("Message to Server: ")
         self.send_message(message)
-        response = self.socket.recv(1024).decode('utf-8')
+        
+        print("Waiting for Server response...")
+        response = self.socket.recv(1024).decode("UTF-8")
         print(f"Server said: {response}")
 
 if __name__ == "__main__":
