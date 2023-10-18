@@ -139,7 +139,7 @@ a:focus {
 pre {
     margin-bottom: 0px;
     overflow: hidden;
-    animation: typing 0.5s steps(30, end);
+    animation: typing 1.0s steps(30, end);
     color: rgb(100, 157, 117);
 }
 
@@ -173,7 +173,7 @@ pre {
 .gallery-wrapper {
     position: relative;
     flex-grow: 1;
-    margin: auto;
+
     max-width: 1200px;
     max-height: 1200px;
 
@@ -203,4 +203,3 @@ img {
         transform: scale(2);
     }
 }
-  

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}./skills - {{skill.name}}{% endblock %}
+
+{% block content %}
+  <div id="initial_message">
+    <p class="text-description">Opened route /skills.</p>
+    <p class="text-muted"><i>- Displaying selected skill's description.</i></p>
+    <hr>
+
+    <p><span class="text-description">Skill <span class="text-important">{{skill.name}}</span>:</span></p>
+    <p><strong class="text-important">{{ skill["description"]  }}</strong></span></p>
+  </div>
+  {% block output %}{% endblock %}
+{% endblock %}

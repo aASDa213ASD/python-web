@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}./system{% endblock %}
+
+{% block content %}
+  <div id="initial_message">
+    <p class="text-description">Opened route /system.</p>
+    <p class="text-muted"><i>- Displaying current system info, user agent and time.</i></p>
+    <hr>
+
+    <p><span class="text-description">System information:</span></p>
+    <div>
+      {% for key, value in os_info.items() %}
+          <p><strong class="text-description">{{ key }}:</strong> <span class="text-important">{{ value }}</span></p>
+      {% endfor %}
+    </div>
+    <br>
+
+    <p><span class="text-description">User Agent:</span></p>
+    <p><span class="text-important">{{ user_agent }}</span></p>
+    <br>
+
+    <p><span class="text-description">Time:</span></p>
+    <p><span class="text-important">{{ current_time }}</span></p>
+  </div>
+  {% block output %}{% endblock %}
+{% endblock %}

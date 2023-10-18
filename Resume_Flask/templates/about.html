@@ -15,9 +15,8 @@
     <p class="text-description">Since developer planned to fill this terminal with </p>
     <p class="text-description">more data, we recommend you visiting <span class="text-important">other folders</span>:</p>
     <br>
-    <pre>                                                 <span class="text-command">/gamehacking</span>  - <a class="text-default" href="/gamehacking"><b>Open</b></a></pre>
-    <pre>                                                 <span class="text-command">/gallery</span>      - <a class="text-default" href="/gallery"><b>Open</b></a></pre>
+    <pre>                                                 <span class="text-command">/gamehacking</span>  - <a class="text-default" href="{{url_for('gamehacking')}}"><b>Open</b></a></pre>
+    <pre>                                                 <span class="text-command">/gallery</span>      - <a class="text-default" href="{{url_for('gallery')}}"><b>Open</b></a></pre>
   </div>
   {% block output %}{% endblock %}
 {% endblock %}
-
