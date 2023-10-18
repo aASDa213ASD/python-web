@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}My Terminal Resume{% endblock %}
+
+{% block content %}
+
+  <div id="initial_message">
+    <h3><pre><p><span class="text-white">Everything is </span><b>open source</b></p></pre></h3>
+    <i><pre>
+                  __...--~~~~~-._   _.-~~~~~--...__
+                //               `V'               \\  
+               //                 |                 \\  
+              //__...--~~~~~~-._  |  _.-~~~~~~--...__\\
+             //__.....----~~~~._\ | /_.~~~~----.....__\\
+            ====================\\|//===================
+                                `---`</pre></i>
+    <h5><pre>                           <span class="text-white">if you can</span> <b>read assembly</b></pre></h5>
+    <p class="text-description">Welcome to my interactive web terminal.</p>
+    <p class="text-description">For a list of available commands, type <span class="text-command">'help'.</span></p>
+  </div>
+  {% block output %}{% endblock %}
+{% endblock %}
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+  {% block head %}{% endblock %}
+</head>
+
+<body onload="updateCaretPosition()">
+  <main class="terminal">
+    {% block content %}{% endblock %}
+    <div id="command_output">{% block output %}{% endblock %}</div>
+
+    <div class="mt-5">
+      <form method="post" id="shell">
+          <div class="caret-block" style="display: flex; align-items: center;">
+              <span style="margin-right: 5px;">visitor@asd:~$</span>
+              <textarea class="form-control" name="command" id="commandInput" rows="1" wrap="off" maxlength="50" oninput="updateCaretPosition()" onkeydown="handleEnterCommand(event)"></textarea>
+              <span class="caret" id="customCaret"></span>
+          </div>
+      </form>
+  </div>
+    
+  </main>
+
+  {% block scripts %}
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/commands.js') }}"></script>
+  {% endblock %}
+
+</body>
+</html>
