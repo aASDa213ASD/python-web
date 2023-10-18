@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}./about{% endblock %}
+
+{% block content %}
+  <div id="initial_message">
+    <p class="text-description">Opened route /gamehacking.</p>
+    <p class="text-muted"><i>- Here you will know more about game hacking</i></p>
+    <p class="text-muted"><i>and go into more details about the projects.</i></p>
+    <hr>
+    <p class="text-description">First you will get informed about what game hacking even is:</span></p>
+    <p class="text-description">This field is insanely large and has tons of hardships.</span></p>
+    <br>
+    <p class="text-description">Game hacking can be separated into two main categories:</span></p>
+    <p class="text-description">1. <span class="text-important">Cheats</span>.</p>
+    <p class="text-description">2. <span class="text-important">Exploits</span>.</p>
+    <br>
+    <p class="text-description">Cheat represents an action that a player can perform within the game</span></p>
+    <p class="text-description">but this action is done programmatically instead.</span></p>
+    <br>
+    <p class="text-description">Exploit represents the complete break of the rules,</span></p>
+    <p class="text-description">an action that normal player can not do.</span></p>
+    <hr>
+    <p class="text-muted"><i>- Now you know what game-hacking is, but how it's done?</i></p>
+    <p class="text-description">The way we hack can be separated as well: <span class="text-important">Internal</span>/<span class="text-important">External</span>.</p>
+    <p class="text-description">Difference is huge, on external side you create a program</p>
+    <p class="text-description">that runs along with target process and read it's memory.</p>
+    <p class="text-description">On the other hand, internal side requires you to inject</p>
+    <p class="text-description">a dynamic library inside target's memory space.</p>
+    <br>
+    <p class="text-description">You will need a help of <span class="text-important">math</span> if you want to build something worthy.</p>
+    <p class="text-description">But only math is not enough, you have to understand how target process</p>
+    <p class="text-description">is built inside, for that you have to understand <span class="text-important">assembly</span>.</p>
+    <p class="text-description">You need to know which function to call, with what arguments.</p>
+    <p class="text-description">Otherwise, <span class="text-important">memory will corrupt</span> and process will eventually die.</p>
+    <hr>
+    <p class="text-muted"><i>- In other words, this world consumed my brain entirely.</i></p>
+    <p class="text-description">From now on you can fully understant the complexity of hacking</p>
+    <p class="text-description">and I remember days when I thought <span class="text-muted">"C++ is hard"</span></p>
+    <p class="text-description">but little I knew that game hacking is even harder.</p>
+    <hr>
+    <p class="text-muted"><i>- If you've read everything above: you are ready.</i></p>
+    <p><span class="text-description">You've been invited to visit route <span class="text-command">'/gallery'</span></span>  - <a class="text-default" href="/hack"><b>Open</b></a><p>
+  </div>
+  {% block output %}{% endblock %}
+{% endblock %}
+

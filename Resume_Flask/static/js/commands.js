@@ -1,5 +1,5 @@
 // commands.js
-const valid_folders = ["/", "about"];
+const valid_folders = ["/", "about", "gamehacking", "gallery"];
 const valid_commands = []
 
 function updateCaretPosition() {
@@ -53,9 +53,9 @@ document.querySelector("form").onsubmit = function(e) {
     submitForm = false;
     e.preventDefault();
 
-    switch(cmd[0]) {
+    switch(cmd[0].toLowerCase()) {
         case "cd":
-            if (cmd.length > 1 && cmd[1].trim() !== "" && valid_folders.includes(cmd[1].trim()))
+            if (cmd.length > 1 && valid_folders.includes(cmd[1].trim()) || cmd.length === 1)
                 submitForm = true;
             else
                 showInvalidRoute(cmd[1]);
