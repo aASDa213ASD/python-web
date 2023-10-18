@@ -152,6 +152,11 @@ pre {
     color: #B89076;
 }
 
+.text-important {
+    color: #4cb469;
+    text-shadow: 0 0 5px #22865e; 
+}
+
 .text-command {
     color: #73ABAD;
     text-shadow: 0 0 5px #73ABAD; 

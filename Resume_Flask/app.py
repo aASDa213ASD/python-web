@@ -31,6 +31,10 @@ def help():
 def whois():
     return render_template("information/whois.html")
 
+@app.route("/projects", methods=["GET"])
+def projects():
+    return render_template("information/projects.html")
+
 @app.route("/about", methods=["GET", "POST"])
 def about():
     if request.method == "POST":
@@ -44,6 +48,8 @@ def about():
                 route = args[1]
                 if route in routes:
                     return redirect(url_for(route))
+                elif route == "/":
+                    return redirect(url_for(root))
             case "home":
                 print("Redirecting to home...")
                 return redirect(url_for("root"))

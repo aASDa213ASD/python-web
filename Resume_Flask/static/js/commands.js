@@ -1,6 +1,6 @@
 // commands.js
-const valid_folders = ["about", "test"];
-const valid_commands = ["home"]
+const valid_folders = ["/", "about"];
+const valid_commands = []
 
 function updateCaretPosition() {
     const textarea = document.getElementById('commandInput');
@@ -71,6 +71,9 @@ document.querySelector("form").onsubmit = function(e) {
             break;
         case "whois":
             asyncFetch("/whois");
+            break;
+        case "projects":
+            asyncFetch("/projects");
             break;
         default:
             if (!valid_commands.includes(cmd[0].trim()))
