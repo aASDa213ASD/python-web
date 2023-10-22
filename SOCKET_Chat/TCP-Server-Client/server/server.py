@@ -1,6 +1,6 @@
 from datetime import datetime
-import platform
 import socket
+import platform
 from os import system
 from time import time
 
