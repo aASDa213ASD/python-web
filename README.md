@@ -6,7 +6,7 @@
 <picture>
  <img src="https://media.discordapp.net/attachments/1051467735420370944/1165867887987269692/image.png?ex=65486a15&is=6535f515&hm=fe8c2a8582d807029bffefd2d755c16f52a751fafe598fb1475928cac8287b9e&=&width=1737&height=511" alt="">
 </picture>
-#
+
 > A website that I made using Flask/JS/Bootstrap/CSS/HTML Templates.
 > Provides terminal-like experience and info about my personality.
 > Supports multiple commands and route changes.
