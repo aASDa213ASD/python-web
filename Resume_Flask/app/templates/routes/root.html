@@ -1,21 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}./resume{% endblock %}
+{% block title %}./root{% endblock %}
 
 {% block content %}
 
   <div id="initial_message">
-    <h3><pre><p><span class="text-muted">Everything is</span> <b> open source </b></p></pre></h3>
-    <strong><pre>
-                  __...--~~~~~-._   _.-~~~~~--...__
-                //  mov eax,0x0  `V'   jmp 1293    \\  
-               //  lea rdi,[0xe]  |   call 1090     \\  
-              //__...--~~~~~~-._  |  _.-~~~~~~--...__\\
-             //__.....----~~~~._\ | /_.~~~~----.....__\\
-            ====================\\|//===================
-                                `---`</pre></strong>
-    <h5><pre>              <span class="text-muted">if you can</span> <b> read assembly </b></pre></h5>
-    <p class="text-description">Welcome to interactive web terminal.</p>
+  <pre>  <span class="text-muted">Everything is</span>   <b> open source </b></pre>
+    <strong><pre class="text-important">
+         __...--~~~~~-._   _.-~~~~~--...__
+       //  mov eax,0x0  `V'   jmp 1293    \\  
+      //  lea rdi,[0xe]  |   call 1090     \\  
+     //__...--~~~~~~-._  |  _.-~~~~~~--...__\\
+    //__.....----~~~~._\ | /_.~~~~----.....__\\
+   ====================\\|//===================
+                       `---`</pre></strong>
+    <pre>  <span class="text-muted">if you can</span>     <b> read assembly </b>.</pre>
+    <br>
+    <p class="text-description">Welcome to unix-based web terminal.</p>
     <p class="text-description">For a list of available commands, type <span class="text-command">'help'.</span></p>
   </div>
   {% block output %}{% endblock %}

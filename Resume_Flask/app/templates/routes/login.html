@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}./login{% endblock %}
+
+{% block content %}
+  <div id="initial_message">
+    <p class="text-description">Type <span class="text-command">'login &#60;user&#62; &#60;pwd&#62;'</span></p>
+  </div>
+  {% block output %}{% endblock %}
+{% endblock %}

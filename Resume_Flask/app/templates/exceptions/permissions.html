@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}./exception{% endblock %}
+
+{% block content %}
+  <div id="initial_message">
+    <p><span class="text-special">{{exception}}</span></p>
+  </div>
+  {% block output %}{% endblock %}
+{% endblock %}

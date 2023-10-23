@@ -4,9 +4,6 @@
 
 {% block content %}
   <div id="initial_message">
-    <p class="text-description">Opened route /about.</p>
-    <p class="text-muted"><i>- Here you will know more about this terminal.</i></p>
-    <hr>
     <p class="text-description">This is a portfolio of <span class="text-important">student number 16</span> of <span class="text-important">group 31</span></p>
     <p class="text-description">that was made mainly to learn <span class="text-important">Flask</span>.</p>
     <br>
@@ -14,9 +11,10 @@
     <p class="text-description">and tells you something about the developer.</p>
     <p class="text-description">Since developer planned to fill this terminal with </p>
     <p class="text-description">more data, we recommend you visiting <span class="text-important">other folders</span>:</p>
-    <br>
-    <pre>                                                 <span class="text-command">/gamehacking</span>  - <a class="text-default" href="{{url_for('gamehacking')}}"><b>Open</b></a></pre>
-    <pre>                                                 <span class="text-command">/gallery</span>      - <a class="text-default" href="{{url_for('gallery')}}"><b>Open</b></a></pre>
+    <hr>
+    <pre>                                        <span class="text-command">/gamehacking</span>  - <a class="text-default" href="{{url_for('gamehacking')}}"><b>Open</b></a></pre>
+    <pre>                                        <span class="text-command">/gallery</span>      - <a class="text-default" href="{{url_for('gallery')}}"><b>Open</b></a></pre>
+    <hr>
   </div>
   {% block output %}{% endblock %}
 {% endblock %}

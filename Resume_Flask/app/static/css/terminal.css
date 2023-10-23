@@ -92,6 +92,7 @@ textarea.form-control:focus {
 /* Cursor End */
 
 p {
+    font-family: "JetBrains";
     display: block;
     line-height: 1.3em;
     margin: 0;
@@ -137,6 +138,8 @@ a:focus {
 
 /* ASCII Art */
 pre {
+    font-family: "JetBrains";
+    font-size: 28px;
     margin-bottom: 0px;
     overflow: hidden;
     animation: typing 1.0s steps(30, end);
@@ -202,4 +205,50 @@ img {
         z-index: 2;
         transform: scale(2);
     }
+}
+
+table {
+    border-collapse: collapse;
+    border: none;
+    width: 70%;
+}
+  
+td, th {
+    border-bottom: 1px solid #304038;
+    text-align: left;
+    padding: 5px;
+    padding-right: 30px;
+}
+
+.arrow {
+    position: relative;
+    width: 120px;
+    background: #519975;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #1b1918;
+    padding-left: 5px;
+    transition: background-color 0.3s; /* Add a transition for smoother color change */
+}
+
+.arrow:hover {
+    background-color: #4cb469;
+    box-shadow: 0 0 5px #22865e;
+}
+
+.arrow-right:after {
+    content: "";
+    position: absolute;
+    right: -20px;
+    top: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 17px solid transparent;
+    border-left: 20px solid #519975;
+    transition: border-left-color 0.3s;
+}
+
+.arrow:hover:after {
+    border-left-color: #4cb469 ;
 }

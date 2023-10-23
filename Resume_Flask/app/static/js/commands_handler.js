@@ -1,6 +1,6 @@
 // commands.js
-const valid_folders = ["/", "about", "gamehacking", "gallery", "system", "skills"];
-const valid_commands = ["system", "skills"]
+const valid_folders = ["/", "about", "gamehacking", "gallery", "system", "skills", "whoami", "login"];
+const valid_commands = ["system", "skills", "whoami", "exit", "cookies"];
 
 function updateCaretPosition() {
     const textarea = document.getElementById('commandInput');
@@ -23,8 +23,12 @@ function getTextWidth(text, font) {
 function clearConsole() {
     const initial_message = document.getElementById("initial_message");
     const output = document.getElementById("command_output");
-    initial_message.innerHTML = "";
-    output.innerHTML = "";
+
+    try { initial_message.innerHTML = ""; } 
+    catch (error) {}
+
+    try { output.innerHTML = ""; } 
+    catch (error) {}
 }
 
 async function asyncFetch(route) {
@@ -35,18 +39,72 @@ async function asyncFetch(route) {
 }
 
 function showInvalidRoute(route) {
-    const text = "<p>Error: Route '" + route + "' does not exist</p>";
+    const text = "<p class='text-description'>Route '" + route + "' does not exist</p>";
     const output = document.getElementById("command_output");
     output.innerHTML = output.innerHTML + text;
 }
 
 function showCommandNotFound(command) {
-    const text = "<div><p class='text-description'>Command '" + command + "' not found. For a list of commands, type <span class='text-command'>'help'</span></p></div>";
+    if (command === '') 
+        return;
+    
+    const output = document.getElementById("command_output");
+    const text = "<div><p class='text-description'>Command <span class=text-command>'" + command + "'</span> not found. For a list of commands, type <span class='text-command'>'help'</span></p></div>";
+    output.innerHTML = output.innerHTML + text;
+}
+
+function showInvalidUser(username) {
+    const text = "<p class='text-description'>User <span class='text-important'>'" + username + "'</span> does not exist</p>";
     const output = document.getElementById("command_output");
     output.innerHTML = output.innerHTML + text;
 }
 
-document.querySelector("form").onsubmit = function(e) {
+function showAuthenticationFailure() {
+    const text = "<p class='text-description'>Authentication failure</p>";
+    const output = document.getElementById("command_output");
+    output.innerHTML = output.innerHTML + text;
+}
+
+function showUserCredentials(username) {
+    const jsonFilePath = 'static/json/users.json';
+
+    fetch(jsonFilePath)
+        .then(response => response.json())
+        .then(credentials => {
+            const user = credentials.users.find(user => user.username === username);
+
+            if (user) {
+                const text = `<div>
+                    <hr>
+                    <pre><span class="text-description">User credentials <span class="text-important">ID:PWD</span></span></pre>
+                    <pre><span class="text-important">${user.username}:${user.password}</span></pre>
+                </div>`;
+
+                const output = document.getElementById("command_output");
+                output.innerHTML = output.innerHTML + text;
+            } 
+            else
+                showInvalidUser(username);
+        })
+        .catch(error => console.error('Error fetching JSON file:', error));
+}
+
+function validateCredentials(username, password) {
+    const jsonFilePath = 'static/json/users.json';
+
+    return fetch(jsonFilePath)
+        .then(response => response.json())
+        .then(credentials => {
+            const user = credentials.users.find(user => user.username === username && user.password === password);
+            return Boolean(user);
+        })
+        .catch(error => {
+            console.error('Error fetching JSON file:', error);
+            return false;
+        });
+}
+
+document.querySelector("form").onsubmit = async function(e) {
     const input = document.querySelector('textarea[name="command"]'); 
     const cmd = input.value.split(' ');
 
@@ -75,11 +133,35 @@ document.querySelector("form").onsubmit = function(e) {
         case "projects":
             asyncFetch("/projects");
             break;
+        case "passwd":
+            if (cmd.length == 3)
+                submitForm = true;
+            else if (cmd.length == 2)
+                showUserCredentials(cmd[1].trim());
+            else
+                showInvalidUser(cmd[1]);
+            break;
+        case "login":
+            if (cmd.length >= 3) {
+                await validateCredentials(cmd[1].trim(), cmd[2].trim())
+                    .then(isValid => {
+                        if (isValid)
+                            submitForm = true;
+                        else
+                            showAuthenticationFailure();
+                    })
+                    .catch(error => {
+                        console.error('Error validating credentials:', error.message);
+                    });
+            }
+            else
+                submitForm = true;
+            break;
         default:
             if (!valid_commands.includes(cmd[0].trim()))
                 showCommandNotFound(cmd[0])
             else
-                submitForm = true; 
+                submitForm = true;
     }
 
     if (submitForm) 
