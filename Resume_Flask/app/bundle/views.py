@@ -6,7 +6,10 @@ from platform import system as platform_sys
 from platform import version as platform_ver
 from re import compile as re_compile
 from json import loads as json_loads
-from flask import redirect, render_template, request, session, url_for, make_response
+from flask import redirect, render_template, request, session, url_for, make_response, flash
+
+from .models import db, Feedback
+from .forms import FeedbackForm
 
 from app import app
 from app.bundle.handlers import post_handle
@@ -159,6 +162,23 @@ def whoami():
         return render("routes/whoami.html", route=request.path, cookies=request.cookies)
     return redirect(url_for("login"))
 
+@app.route("/feedback", methods=["GET", "POST"])
+def feedback():
+    form = FeedbackForm()
+    if form.validate_on_submit():
+        feedback = Feedback(
+            username=form.username.data, 
+            feedback=form.feedback.data
+        )
+
+        db.session.add(feedback)
+        db.session.commit()
+
+        flash('Feedback submitted successfully!')
+        return redirect(url_for("feedback"))
+    
+    return render("routes/feedback.html", route=request.path, cookies=request.cookies, form=form, feedback_list=db.session.query(Feedback).all())
+    
 @app.route("/exit", methods=["GET", "POST"])
 def exit():
     try:

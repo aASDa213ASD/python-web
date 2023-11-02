@@ -252,3 +252,40 @@ td, th {
 .arrow:hover:after {
     border-left-color: #4cb469 ;
 }
+
+.wtf-form-submitfield {
+    width: 200px;
+    font-weight: bold;
+    background: none;
+    border: none; 
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.wtf-form-inputfield {
+    background: rgba(255, 255, 255, 0.035);
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+}
+
+.wtf-form-textarea {
+    width: 80vh;
+    height: 25vh;
+    background: rgba(255, 255, 255, 0.035);
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    color: white;
+}
+
+.wtf-form-textarea:focus {
+    outline: 0;
+    padding: 20px;
+}
+
+.feedback-div {
+    word-wrap: break-word;
+}

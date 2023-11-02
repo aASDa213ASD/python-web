@@ -1,5 +1,5 @@
 // commands.js
-const valid_folders = ["/", "about", "gamehacking", "gallery", "system", "skills", "whoami", "login"];
+const valid_folders = ["/", "about", "gamehacking", "gallery", "system", "skills", "whoami", "login", "feedback"];
 const valid_commands = ["system", "skills", "whoami", "exit", "cookies"];
 
 function updateCaretPosition() {
