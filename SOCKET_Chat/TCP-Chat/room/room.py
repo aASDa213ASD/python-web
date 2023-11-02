@@ -8,9 +8,10 @@ from time import time
 
 
 class ChatUser:
-    def __init__(self, socket, host, name: str) -> None:
+    def __init__(self, socket, host, ip_address: str, name: str) -> None:
         self.socket = socket
         self.host = host
+        self.ip_address = ip_address
         self.name = name
 
 class Room:
@@ -37,8 +38,8 @@ class Room:
     
     def initialize(self) -> None:
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.port: int = 1024
-        self.socket.bind((socket.gethostname(), self.port))
+        self.port: int = 7777
+        self.socket.bind(("0.0.0.0", self.port))
         self.socket.listen(5)
 
         self.say(f"Launched on {socket.gethostbyname(socket.gethostname())}:{self.port}")
@@ -81,11 +82,11 @@ class Room:
             try:
                 client_socket, client_host = self.socket.accept()
                 if client_socket and client_host:
-                    username = client_socket.recv(1024).decode("UTF-8")
-                    self.user_list.append(ChatUser(client_socket, client_host, username))
+                    user_data = client_socket.recv(1024).decode("UTF-8").split()
+                    self.user_list.append(ChatUser(client_socket, client_host, user_data[0], user_data[1]))
                     self.send_response(client_socket, f"1")
-                    self.promote_system_message(f"{username} has joined.")
-                    print(f"[{datetime.now().time().strftime('%H:%M:%S')}] {username} has joined.")
+                    self.promote_system_message(f"{user_data[1]} has joined.")
+                    print(f"[{datetime.now().time().strftime('%H:%M:%S')}] {user_data[1]} has joined.")
             except Exception:
                 pass
     
