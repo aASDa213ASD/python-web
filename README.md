@@ -1,15 +1,27 @@
 ## Flask Terminal Portfolio
-> Updated:
-> User can be switched and allowed to save personal cookies.
-> Directory is displayed instead of plain '~'.
-> Restyled a bit more.
+> Updated: <br>
+> <b>- Hosted on Arch Linux 6.5.9-arch2-1.</b> <br>
+> <b>- Connection to database along with migrations have been added.</b> <br>
+> <b>- Feedback page done with use of WTF forms.</b> <br>
+> Some screenshots: <br>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1169668812333916210/image.png?ex=65563df8&is=6543c8f8&hm=d8d9cc701371df524c2fdcd58e9e1e51cb53b9deb757eeebd5e265ea4c63165b&=" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1169672926950342676/image.png?ex=655641cd&is=6543cccd&hm=b2900d66c046d512f387759e3d10927a82d7010b7cbf734c517a251c34487ae2&=&width=802&height=847" alt="">
+</picture>
+
+> Updated: <br>
+> <b>- User can be switched and allowed to save personal cookies.</b> <br>
+> <b>- Directory is displayed instead of plain '~'.</b> <br>
+> <b>- Restyled a bit more.</b> <br>
 <picture>
  <img src="https://media.discordapp.net/attachments/1051467735420370944/1165867887987269692/image.png?ex=65486a15&is=6535f515&hm=fe8c2a8582d807029bffefd2d755c16f52a751fafe598fb1475928cac8287b9e&=&width=1737&height=511" alt="">
 </picture>
 
-> A website that I made using Flask/JS/Bootstrap/CSS/HTML Templates.
-> Provides terminal-like experience and info about my personality.
-> Supports multiple commands and route changes.
+> A website that I made using Flask/JS/Bootstrap/CSS/HTML Templates. <br>
+> Provides terminal-like experience and info about my personality. <br>
+> Supports multiple commands and route changes. <br>
 <picture>
  <img src="https://media.discordapp.net/attachments/1051467735420370944/1164368610123325523/image.png?ex=6542f5c5&is=653080c5&hm=a23ac1938422cce703d7205594af776f0623a15905facfbbc05e9a9904562a27&=&width=1102&height=798" alt="">
 </picture>
