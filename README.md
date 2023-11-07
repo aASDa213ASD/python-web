@@ -6,7 +6,10 @@
 
    `Python-Web` is a <b>git repository</b> where I dump my <b>web python projects</b> for <u>university</u>.
 
+   <img src="https://media.discordapp.net/attachments/896842645580685382/1014734582567936012/Separator2.png?ex=655588b9&is=654313b9&hm=b2745ba90dee657d8b5daf4c5f34093d018d8beba1b5790d2f4fb666914880c8&=&width=1003&height=50">
 </div>
+
+<br>
 
 > # Projects
    1. Web-Terminal: <a href="https://github.com/aASDa213ASD/Python-Web/tree/master/Web-Terminal">checkout</a>.

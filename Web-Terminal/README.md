@@ -11,6 +11,8 @@
  <img src="https://media.discordapp.net/attachments/1051467735420370944/1169672926950342676/image.png?ex=655641cd&is=6543cccd&hm=b2900d66c046d512f387759e3d10927a82d7010b7cbf734c517a251c34487ae2&=&width=802&height=847" alt="">
 </picture>
 
+<br>
+
 > # Update 1: <br>
 > <b>- User can be switched and allowed to save personal cookies.</b> <br>
 > <b>- Directory is displayed instead of plain '~'.</b> <br>
@@ -18,6 +20,8 @@
 <picture>
  <img src="https://media.discordapp.net/attachments/1051467735420370944/1165867887987269692/image.png?ex=65486a15&is=6535f515&hm=fe8c2a8582d807029bffefd2d755c16f52a751fafe598fb1475928cac8287b9e&=&width=1737&height=511" alt="">
 </picture>
+
+<br>
 
 > # Release: <br>
 > A website that I made using Flask/JS/Bootstrap/CSS/HTML Templates. <br>
