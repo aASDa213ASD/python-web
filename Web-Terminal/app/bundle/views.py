@@ -9,7 +9,7 @@ from json import loads as json_loads
 from flask import redirect, render_template, request, session, url_for, make_response, flash
 
 from .models import db, Feedback
-from .forms import FeedbackForm, LoginForm
+from .forms import FeedbackForm, LoginForm, ChangePasswordForm
 
 from app import app
 from app import bcrypt
@@ -169,8 +169,7 @@ def login():
                 session['remember'] = remember_flag
                 return redirect(url_for("whoami"))
             else:
-                flash("You didn't check 'Remember me' flag. Check you credentials again.", "danger")
-                return redirect(url_for("login"))
+                return redirect(url_for("root"))
         else:
             flash("Authentication failure", "danger")
     return render("routes/login.html", route=request.path, form=form)
@@ -229,6 +228,29 @@ def exit():
 
 #     print("Done, checkout the database now.")
 #     return redirect(url_for("login"))
+
+@app.route("/passwd", methods=["GET", "POST"])
+def passwd():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        new_pwd = form.password.data
+        confirm_pwd = form.confirm_password.data
+
+        if new_pwd == confirm_pwd:
+            user = User.query.filter_by(username=session.get("user")).first()
+            if user:
+                new_pwd = bcrypt.generate_password_hash(new_pwd).decode('utf-8')
+                user.password = new_pwd
+
+                db.session.add(user)
+                db.session.commit()
+
+                session.pop("user") # <- Log him out
+                return redirect(url_for("login"))
+        else:
+            ...
+    
+    return render("routes/passwd.html", route=request.path, form=form)
 
 @app.route("/", methods=["GET", "POST"])
 def root():

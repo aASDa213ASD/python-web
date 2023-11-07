@@ -73,24 +73,14 @@ def post_handle():
                 session.pop("user")
             return redirect(url_for("root"))
         case "passwd":
-            if user and user == args[1]:
-                json_file_path = 'app/static/json/users.json'
-
-                with open(json_file_path, 'r') as file:
-                    credentials = json_load(file)
-                    user_index = next((index for (index, user) in enumerate(credentials['users']) if user['username'] == args[1]), None)
-                    if user_index is not None:
-                        credentials['users'][user_index]['password'] = args[2]
-                        with open(json_file_path, 'w') as file:
-                            json_dump(credentials, file, indent=2)
-                session.pop("user")
-                return redirect(url_for("login"))
-            else:
-                return render_template(
-                    "exceptions/permissions.html",
-                    user=session.get("user"), route=request.path,
-                    exception="You don't have enough permissions to execute this command."
-                )
+            return redirect(
+                url_for("passwd")
+            ) if session.get("user") else render_template(
+                "exceptions/permissions.html",
+                user=session.get("user"),
+                route=request.path,
+                exception="You don't have enough permissions to execute this command."
+            )
         case "cookies":
             if len(args) >= 2:
                 if len(args) == 4 and args[1] == "set":

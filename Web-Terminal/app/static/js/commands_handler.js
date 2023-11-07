@@ -134,7 +134,9 @@ document.querySelector("form").onsubmit = async function(e) {
             asyncFetch("/projects");
             break;
         case "passwd":
-            if (cmd.length == 3)
+            if (cmd.length == 1)
+                submitForm = true;
+            else if (cmd.length == 3)
                 submitForm = true;
             else if (cmd.length == 2)
                 showUserCredentials(cmd[1].trim());
