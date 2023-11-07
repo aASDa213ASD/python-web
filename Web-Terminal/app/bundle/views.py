@@ -9,10 +9,12 @@ from json import loads as json_loads
 from flask import redirect, render_template, request, session, url_for, make_response, flash
 
 from .models import db, Feedback
-from .forms import FeedbackForm
+from .forms import FeedbackForm, LoginForm
 
 from app import app
+from app import bcrypt
 from app.bundle.handlers import post_handle
+from app.bundle.models import db, User
 
 """ Render helper function """
 def render(template: str, **kwargs):
@@ -150,9 +152,28 @@ def gallery():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == "POST" and (handle := post_handle()):
-        return handle
-    return render("routes/login.html", route=request.path)
+    if session.get("user"):
+        return redirect(url_for("whoami"))
+    
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        remember_flag = form.remember.data
+
+        user = User.query.filter_by(username=username).first()
+        if user and bcrypt.check_password_hash(user.password, password):
+            if remember_flag:
+                session['user_id'] = user.id
+                session['user'] = user.username
+                session['remember'] = remember_flag
+                return redirect(url_for("whoami"))
+            else:
+                flash("You didn't check 'Remember me' flag. Check you credentials again.", "danger")
+                return redirect(url_for("login"))
+        else:
+            flash("Authentication failure", "danger")
+    return render("routes/login.html", route=request.path, form=form)
 
 @app.route("/whoami", methods=["GET", "POST"])
 def whoami():
@@ -186,6 +207,28 @@ def exit():
     except Exception:
         pass
     return redirect(url_for("root"))
+
+# @app.route("/null", methods=["GET", "POST"])
+# def null():
+#     # Create some users <-- delete this after
+#     print("Adding sample users to database...")
+#     hashed_password = bcrypt.generate_password_hash("master").decode('utf-8')
+#     user1 = User(username="master", password=hashed_password)
+#     hashed_password = bcrypt.generate_password_hash("wellick123").decode('utf-8')
+#     user2 = User(username='tyrell', password=hashed_password)
+#     hashed_password = bcrypt.generate_password_hash("r0b0t").decode('utf-8')
+#     user3 = User(username='sams3pi0l', password=hashed_password)
+
+#     # Add users to the database session
+#     db.session.add(user1)
+#     db.session.add(user2)
+#     db.session.add(user3)
+
+#     # Commit the changes to the database
+#     db.session.commit()
+
+#     print("Done, checkout the database now.")
+#     return redirect(url_for("login"))
 
 @app.route("/", methods=["GET", "POST"])
 def root():

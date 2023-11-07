@@ -1,9 +1,16 @@
 ## Flask Web-Terminal Portfolio
+> # Update 3: <br>
+> <b>- Commited `requirements.txt` file for easier setup.</b> <br>
+> <b>- Comments are now displayed from newest to oldest.</b> <br>
+> <b>- Added `feedback` command as well as it's hint in `help` and `ls`.</b> <br>
+> <b>- ...</b> <br>
+
+<br>
+
 > # Update 2: <br>
 > <b>- Hosted on Arch Linux 6.5.9-arch2-1.</b> <br>
-> <b>- Connection to database along with migrations have been added.</b> <br>
-> <b>- Feedback page done with use of WTF forms.</b> <br>
-> Some screenshots: <br>
+> <b>- Connection to database (`MariaDB`) along with migrations have been added.</b> <br>
+> <b>- Feedback page implemented with use of `WTF forms`.</b> <br>
 <picture>
  <img src="https://media.discordapp.net/attachments/1051467735420370944/1169668812333916210/image.png?ex=65563df8&is=6543c8f8&hm=d8d9cc701371df524c2fdcd58e9e1e51cb53b9deb757eeebd5e265ea4c63165b&=" alt="">
 </picture>

@@ -9,3 +9,8 @@ class Feedback(db.Model):
   username = db.Column(db.String(50))
   feedback = db.Column(db.String(255))
   date = db.Column(db.DateTime, default=datetime.now().replace(microsecond=0))
+
+class User(db.Model):
+  id = db.Column(db.Integer, primary_key=True) 
+  username = db.Column(db.String(50), unique=True, nullable=False)
+  password = db.Column(db.String(60), nullable=False)

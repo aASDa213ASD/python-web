@@ -39,7 +39,6 @@ def post_handle():
             if route and route in routes:
                 return redirect(url_for(route))
             elif not route or route == "/" or route == "~":
-                print("redirecting to root")
                 return redirect(url_for("root"))
         case "system":
             return redirect(url_for("system"))

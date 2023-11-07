@@ -263,6 +263,7 @@ td, th {
 }
 
 .wtf-form-inputfield {
+    width: 50vh;
     background: rgba(255, 255, 255, 0.035);
     border: none;
     border-radius: 0.4rem;
@@ -288,4 +289,64 @@ td, th {
 
 .feedback-div {
     word-wrap: break-word;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    font: inherit;
+    color: #519975;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.12em solid #519975;
+    border-radius: 0.15em;
+    display: grid;
+    place-content: center;
+}
+  
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    /* Windows High Contrast Mode */
+    background-color: #bbbbbb;
+}
+  
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+  
+input[type="checkbox"]:focus {
+    outline: none;
+}
+  
+input[type="checkbox"]:disabled {
+    --form-control-color: var(--form-control-disabled);
+
+    color: var(--form-control-disabled);
+    cursor: not-allowed;
+}
+
+.login-form {
+    white-space: nowrap;
+    width: 50vh;
+    padding: 5px;
+    background: #101010;
+    border-radius: 0.4rem;
+    resize: none !important;
+    outline: none !important;
+    border: none !important;
+    overflow: hidden;
+    caret-color: rgba(0, 0, 0, 0);
+    width: 50vh;
+    line-height: 1.1;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 1em;
 }
