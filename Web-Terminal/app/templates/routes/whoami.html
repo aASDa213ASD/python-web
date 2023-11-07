@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}./whoami{% endblock %}
+
+{% block content %}
+  <div id="initial_message">
+    <p class="text-description">
+      Welcome, <span class="text-important"><strong>{{ user }}</strong></span>.
+      <a class="arrow arrow-right" href="{{url_for('exit')}}"><b>Exit</b></a>
+    </p>
+    <hr>
+    
+    <strong>
+      <span class="text-description">
+        <span class="text-important">Cookie</span> table:
+      </span>
+    </strong>
+
+    <table>
+      <tr>
+        <th class="text-description">Action</th>
+        <th class="text-description">Key</th>
+        <th class="text-description">Value</th>
+      </tr>
+      {% for key, value in cookies.items() %}
+      <tr>
+        <th><a class="arrow arrow-right" href="{{ url_for('wipe_cookie', key=key) }}"><b>Wipe</b></a></th>
+        <th class="text-important">{{ key }}</th>
+        <th class="text-important">{{ value }}</th>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% block output %}{% endblock %}
+{% endblock %}

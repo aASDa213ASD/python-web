@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}./system{% endblock %}
+
+{% block content %}
+  <div id="initial_message">
+    <div>
+      {% for key, value in os_info.items() %}
+          <p><strong class="text-description">{{ key }}:</strong> <span class="text-important">{{ value }}</span></p>
+      {% endfor %}
+    </div>
+    <br>
+
+    <p><span class="text-description">User Agent:</span></p>
+    <p><span class="text-important">{{ ua_platform }}</span></p>
+    <p><span class="text-important">{{ ua_webkit }}</span></p>
+    <p><span class="text-important">{{ ua_browser }}</span></p>
+    <br>
+
+    <p><span class="text-description">Time:</span> <span class="text-important">{{ current_time }}</span></p>
+  </div>
+  {% block output %}{% endblock %}
+{% endblock %}

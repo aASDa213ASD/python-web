@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/terminal.css') }}">
+  
+  {% block head %}{% endblock %}
+</head>
+
+<body onload="updateCaretPosition()">
+    <main class="terminal">
+      {% block content %}{% endblock %}
+
+      <div id="command_output">
+        {% block output %}{% endblock %}
+      </div>
+      
+      {% block main %}
+      <div class="mt-4">
+        <form method="post" id="shell">
+            <div class="caret-block" style="display: flex; align-items: center;">
+                {% if user and route %}
+                  <span style="margin-right: 5px;">{{ user }}@asd<span class="text-command">:{{ route }}$</span></span>
+                {% elif route %}
+                  <span style="margin-right: 5px;">guest@asd<span class="text-command">:{{ route }}$</span></span>
+                {% endif %}
+                <textarea class="form-control" name="command" id="commandInput" rows="1" wrap="off" maxlength="50" oninput="updateCaretPosition()" onkeydown="handleEnterCommand(event)" autofocus></textarea>
+                <span class="caret" id="customCaret"></span>
+            </div>
+        </form>
+      </div>
+      {% endblock %}
+    </main>
+
+  {% block scripts %}
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/commands_handler.js') }}"></script>
+  {% endblock %}
+
+</body>
+</html>

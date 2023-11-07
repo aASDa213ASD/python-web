@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}./gallery{% endblock %}
+
+{% block content %}
+  <div id="initial_message">
+    <div class="gallery-wrapper">
+      <img src="{{url_for('static', filename='images/cs16_1.png')}}" width="800" alt="">
+      <img src="{{url_for('static', filename='images/cs16_2.png')}}" alt="">
+      <img src="{{url_for('static', filename='images/fl_1.png')}}" alt="">
+      <img src="{{url_for('static', filename='images/lol_1.png')}}" alt="">
+      <img src="{{url_for('static', filename='images/lol_2.png')}}" alt="">
+      <img src="{{url_for('static', filename='images/lol_3.png')}}" alt="">
+      <img src="{{url_for('static', filename='images/lol_4.png')}}" alt="">
+      <img src="{{url_for('static', filename='images/lol_5.png')}}" alt="">
+      <img src="{{url_for('static', filename='images/lol_6.png')}}" alt="">
+      <img src="{{url_for('static', filename='images/lol_7.png')}}" alt="">
+    </div>
+  </div>
+  {% block output %}{% endblock %}
+{% endblock %}
