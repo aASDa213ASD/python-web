@@ -3,9 +3,20 @@
 > <b>- Commited `requirements.txt` file for easier setup.</b> <br>
 > <b>- Comments are now displayed from newest to oldest.</b> <br>
 > <b>- Added `feedback` command as well as it's hint in `help` and `ls`.</b> <br>
-> <b>- ...</b> <br>
-
-<br>
+> <b>- Login page has been rewritten to use `flask_wtf` forms & `flash` messages.</b> <br>
+> <b>- Users moved to `local database`.</b> <br>
+> <b>- `app.secret_key` is now indeed secret.</b> <br>
+> <b>- Users' passwords are now `hashed`.</b> <br>
+> <b>- ... other changes that I simply can't remember.</b> <br>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1171306044929101834/image.png?ex=655c32c2&is=6549bdc2&hm=c84bce8e4d2e779ed4e4d7da012876674b1e03f26ccb1e232790dc45ce2884cc&" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1171306114231582751/image.png?ex=655c32d3&is=6549bdd3&hm=9a3c895cebd8ebe9cecb06892dd4624abc1b74a10c3f03ec85423127bf060128&=&width=1416&height=905" alt="">
+</picture>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1171296780659462184/image.png?ex=655c2a22&is=6549b522&hm=66081ab8404636765c96020fd7ec0c15df9aa65c3f4cfce7a7b0be48a0ba7622&" alt="">
+</picture>
 
 > # Update 2: <br>
 > <b>- Hosted on Arch Linux 6.5.9-arch2-1.</b> <br>
