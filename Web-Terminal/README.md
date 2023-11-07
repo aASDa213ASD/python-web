@@ -1,4 +1,18 @@
 ## Flask Web-Terminal Portfolio
+> # Update 3.1: <br>
+> <b>- Added command `passwd`.</b> <br>
+> <b>- `passwd` now checks for `session`, otherwise shows permission exception.</b> <br>
+> <b>- `ChangePasswordForm` checks for equality for `pwd` & `confirm_pwd` through `EqualTo`</b> <br>
+> <b>- New passwords are `hashed` as well.</b> <br>
+> <b>- Fixed minor typos in different places.</b> <br>
+> <b>- Fixed error colors displayed in `flash` messages.</b> <br>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1171328337076035594/image.png?ex=655c4785&is=6549d285&hm=67f1f6c8141644bd15334e7af20453201987a8b6a8887e65b28bd484df147078&=&width=1820&height=502" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1171328461860778144/image.png?ex=655c47a3&is=6549d2a3&hm=403c70232342d6ee5bc8d9bbf5315215b914247ce06b8223c7129aebdbae2c7f&=&width=1172&height=905" alt="">
+</picture>
+
 > # Update 3: <br>
 > <b>- Commited `requirements.txt` file for easier setup.</b> <br>
 > <b>- Comments are now displayed from newest to oldest.</b> <br>

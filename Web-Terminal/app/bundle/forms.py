@@ -7,7 +7,7 @@ from wtforms import (
 )
 
 from wtforms.validators import (
-  InputRequired, Email, EqualTo,
+  EqualTo,
   DataRequired, Length
 )
 

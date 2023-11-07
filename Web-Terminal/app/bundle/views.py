@@ -247,8 +247,6 @@ def passwd():
 
                 session.pop("user") # <- Log him out
                 return redirect(url_for("login"))
-        else:
-            ...
     
     return render("routes/passwd.html", route=request.path, form=form)
 
