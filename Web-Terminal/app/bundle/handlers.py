@@ -1,13 +1,5 @@
-from datetime import datetime
-from platform import machine as platform_machine
-from platform import node as platform_node
-from platform import processor as platform_proc
-from platform import release as platform_release
-from platform import system as platform_sys
-from platform import version as platform_ver
-from json import load as json_load
-from json import dump as json_dump
 from flask import redirect, render_template, request, url_for, session
+from flask_login import current_user, logout_user
 
 from app import app
 
@@ -69,8 +61,7 @@ def post_handle():
             
             return redirect(url_for("login"))
         case "exit": 
-            if user:
-                session.pop("user")
+            logout_user()
             return redirect(url_for("root"))
         case "passwd":
             return redirect(
@@ -93,13 +84,7 @@ def post_handle():
         case "feedback":
             return redirect(url_for("feedback"))
         case "todo":
-            return redirect(url_for("todo")
-            ) if session.get("user") else render_template(
-                "exceptions/permissions.html",
-                user=session.get("user"),
-                route=request.path,
-                exception="You don't have enough permissions to execute this command."
-                )
+            return redirect(url_for("todo"))
         case "register":
             return redirect(url_for("register"))
         case "users":

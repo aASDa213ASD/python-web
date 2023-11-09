@@ -1,8 +1,23 @@
 ## Flask Web-Terminal Portfolio
+> # Update 6: <br>
+> <b>- Tuned `__init.py__` for `LoginManager`. </b> <br>
+> <b>- Tuned `handlers.py` for `LoginManager`. </b> <br>
+> <b>- Tuned `views.py` for `LoginManager`. </b> <br>
+> <b>- Implemented `LoginManager()` from `flask_login` module.</b> <br>
+> <b>- Along with statement above: </b> <br>
+> <b>- `@login_required` decorators. </b> <br>
+> <b>- `logout_user()` method instead of session destroyment. </b> <br>
+> <b>- `is_authenticated` method instead of `session.get()`. </b> <br>
+> <b>- `redirect(url_for("login"))` for `@login_required` decorator. </b> <br> <hr>
+> <kbd>Attention:</kbd> <b><u>There's not much to screenshot, look up code instead</u>.</b> <br>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1172224559987032255/image.png?ex=655f8a31&is=654d1531&hm=39bdb55b88ee342bb033f18de3ea93440f357ff6631e3f41565e32ac08784595&" alt="">
+</picture>
+
 > # Update 5.1: <br>
 > <b>- Added `users` command to list all registered users.</b> <br>
 <picture>
- <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1172190645478228088/image.png?ex=655f6a9c&is=654cf59c&hm=cb9479261ad0b3267c1a1ea3d7a08be6c20ef4ec2a7da5b7652f8d82109a2a97&" alt="">
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1172191096697278494/image.png?ex=655f6b07&is=654cf607&hm=c50d9c9af01e10157ea3f2a570038fe4c54ad4f05f08da72597716f492d91ec1&" alt="">
 </picture>
 
 > # Update 5: <br>

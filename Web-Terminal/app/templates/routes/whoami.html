@@ -5,7 +5,7 @@
 {% block content %}
   <div id="initial_message">
     <p class="text-description">
-      Welcome, <span class="text-important"><strong>{{ user }}</strong></span>.
+      Welcome, <span class="text-important"><strong>{{ current_user.username }}</strong></span>.
       <a class="arrow arrow-right" href="{{url_for('exit')}}"><b>Exit</b></a>
     </p>
     <hr>

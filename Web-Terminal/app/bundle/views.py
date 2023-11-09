@@ -1,13 +1,12 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from platform import machine as platform_machine
 from platform import node as platform_node
 from platform import processor as platform_proc
 from platform import system as platform_sys
 from platform import version as platform_ver
 from re import compile as re_compile
-from json import loads as json_loads
 from flask import redirect, render_template, request, session, url_for, make_response, flash
-
+from flask_login import login_user, current_user, logout_user, login_required
 from .forms import FeedbackForm, LoginForm, ChangePasswordForm, TODOForm, RegisterForm
 
 from app import app
@@ -22,6 +21,7 @@ def render(template: str, **kwargs):
 """ Cookies block """
 @app.route("/setcookie", methods=["GET", "POST"])
 def set_cookie():
+    """ Deprecated, use LoginManager instead """
     if request.method == "POST" and (handle := post_handle()):
         return handle
     
@@ -42,6 +42,7 @@ def set_cookie():
 
 @app.route('/wipecookie', methods=["GET", "POST"])
 def wipe_cookie():
+    """ Deprecated, use LoginManager instead """
     if request.method == "POST" and (handle := post_handle()):
         return handle
 
@@ -152,7 +153,7 @@ def gallery():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    if session.get("user"):
+    if current_user.is_authenticated:
         return redirect(url_for("whoami"))
     
     form = RegisterForm()
@@ -171,9 +172,9 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if session.get("user"):
+    if current_user.is_authenticated:
         return redirect(url_for("whoami"))
-    
+        
     form = LoginForm()
     if form.validate_on_submit():
         username = form.username.data
@@ -182,9 +183,10 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and user.validate_pwd(password):
             if remember_flag:
-                session['user_id'] = user.id
-                session['user'] = user.username
-                session['remember'] = remember_flag
+                login_user(user, remember_flag)
+                #session['user_id'] = user.id
+                #session['user'] = user.username
+                #session['remember'] = remember_flag
                 return redirect(url_for("whoami"))
             else:
                 return redirect(url_for("root"))
@@ -193,11 +195,15 @@ def login():
     return render("routes/login.html", route=request.path, form=form)
 
 @app.route("/whoami", methods=["GET", "POST"])
+@login_required
 def whoami():
     if request.method == "POST" and (handle := post_handle()):
         return handle
-    if session.get("user"):
+    
+    if current_user.is_authenticated:
+        """ Deprecated request.cookies, use LoginManager instead """
         return render("routes/whoami.html", route=request.path, cookies=request.cookies)
+    
     return redirect(url_for("login"))
 
 @app.route("/feedback", methods=["GET", "POST"])
@@ -220,7 +226,7 @@ def feedback():
 @app.route("/exit", methods=["GET", "POST"])
 def exit():
     try:
-        session.pop("user")
+        logout_user()
     except Exception:
         pass
     return redirect(url_for("root"))
@@ -245,12 +251,12 @@ def passwd():
     return render("routes/passwd.html", route=request.path, form=form)
 
 @app.route("/todo", methods=["GET", "POST"])
+@login_required
 def todo():
-    print("<@app.route/todo> Begin")
     form = TODOForm()
-    if session.get("user"):
+    if current_user.is_authenticated:
         user = User.query.filter_by(username=session.get("user")).first()
-        return render("routes/todo.html", route=request.path, form=form, todo_list=reversed(db.session.query(Todo).filter_by(user_id=user.id).all()))
+        return render("routes/todo.html", route=request.path, form=form, todo_list=reversed(db.session.query(Todo).filter_by(user_id=current_user.id).all()))
 
     if form.validate_on_submit():
         user = User.query.filter_by(username=session.get("user")).first()
@@ -282,9 +288,7 @@ def todo_remove(id):
 def users():
     if request.method == "POST" and (handle := post_handle()):
         return handle
-    
     registered_users = [username for (username,) in User.query.with_entities(User.username).all()]
-
     return render("routes/users.html", route=request.path, user_list=registered_users)
 
 @app.route("/", methods=["GET", "POST"])

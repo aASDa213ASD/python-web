@@ -21,8 +21,8 @@
       <div class="mt-4">
         <form method="post" id="shell">
             <div class="caret-block" style="display: flex; align-items: center;">
-                {% if user and route %}
-                  <span style="margin-right: 5px;">{{ user }}@asd<span class="text-command">:{{ route }}$</span></span>
+                {% if current_user and current_user.is_authenticated and route %}
+                  <span style="margin-right: 5px;">{{ current_user.username }}@asd<span class="text-command">:{{ route }}$</span></span>
                 {% elif route %}
                   <span style="margin-right: 5px;">guest@asd<span class="text-command">:{{ route }}$</span></span>
                 {% endif %}
