@@ -1,4 +1,18 @@
 ## Flask Web-Terminal Portfolio
+> # Update 4: <br>
+> <b>- New `migrations` for TODO list table.</b> <br>
+> <b>- Added command `todo` / `cd todo`.</b> <br>
+> <b>- Todo list is now connected to each user separately.</b> <br>
+> <b>- Each task now has `[Due date]` field.</b> <br>
+> <b>- `CRUD`: Each task can be marked/unmarked as "Done" or even removed completely.</b> <br>
+> <b>- Restyled `[Date Selector]`.</b> <br>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1172149323400749127/image.png?ex=655f4420&is=654ccf20&hm=6df13a044de5fd0ad27c0d42f040fb5cff81e035b7c5122e7551109c6b140beb&" alt="">
+</picture>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1172150045362094121/image.png?ex=655f44cc&is=654ccfcc&hm=17f98cb42b8f1f834df7eaf533c5da27f5a20bd8336d5872bfac9b43339b578d&" alt="">
+</picture>
+
 > # Update 3.1: <br>
 > <b>- Added command `passwd`.</b> <br>
 > <b>- `passwd` now checks for `session`, otherwise shows permission exception.</b> <br>

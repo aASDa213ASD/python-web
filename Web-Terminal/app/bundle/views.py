@@ -8,13 +8,12 @@ from re import compile as re_compile
 from json import loads as json_loads
 from flask import redirect, render_template, request, session, url_for, make_response, flash
 
-from .models import db, Feedback
-from .forms import FeedbackForm, LoginForm, ChangePasswordForm
+from .forms import FeedbackForm, LoginForm, ChangePasswordForm, TODOForm
 
 from app import app
 from app import bcrypt
 from app.bundle.handlers import post_handle
-from app.bundle.models import db, User
+from app.bundle.models import db, User, Feedback, Todo
 
 """ Render helper function """
 def render(template: str, **kwargs):
@@ -66,6 +65,7 @@ def wipe_cookie():
 
 def list_folders():
     return render("information/list_folders.html")
+
 """ Information block """
 @app.route("/ls", methods=["GET"])
 def list_folders():
@@ -207,48 +207,61 @@ def exit():
         pass
     return redirect(url_for("root"))
 
-# @app.route("/null", methods=["GET", "POST"])
-# def null():
-#     # Create some users <-- delete this after
-#     print("Adding sample users to database...")
-#     hashed_password = bcrypt.generate_password_hash("master").decode('utf-8')
-#     user1 = User(username="master", password=hashed_password)
-#     hashed_password = bcrypt.generate_password_hash("wellick123").decode('utf-8')
-#     user2 = User(username='tyrell', password=hashed_password)
-#     hashed_password = bcrypt.generate_password_hash("r0b0t").decode('utf-8')
-#     user3 = User(username='sams3pi0l', password=hashed_password)
-
-#     # Add users to the database session
-#     db.session.add(user1)
-#     db.session.add(user2)
-#     db.session.add(user3)
-
-#     # Commit the changes to the database
-#     db.session.commit()
-
-#     print("Done, checkout the database now.")
-#     return redirect(url_for("login"))
-
 @app.route("/passwd", methods=["GET", "POST"])
 def passwd():
     form = ChangePasswordForm()
     if form.validate_on_submit():
         new_pwd = form.password.data
         confirm_pwd = form.confirm_password.data
+        user = User.query.filter_by(username=session.get("user")).first()
+        if user:
+            new_pwd = bcrypt.generate_password_hash(new_pwd).decode('utf-8')
+            user.password = new_pwd
 
-        if new_pwd == confirm_pwd:
-            user = User.query.filter_by(username=session.get("user")).first()
-            if user:
-                new_pwd = bcrypt.generate_password_hash(new_pwd).decode('utf-8')
-                user.password = new_pwd
+            db.session.add(user)
+            db.session.commit()
 
-                db.session.add(user)
-                db.session.commit()
-
-                session.pop("user") # <- Log him out
-                return redirect(url_for("login"))
+            session.pop("user") # <- Log him out
+            return redirect(url_for("login"))
     
     return render("routes/passwd.html", route=request.path, form=form)
+
+@app.route("/todo", methods=["GET", "POST"])
+def todo():
+    print("<@app.route/todo> Begin")
+    form = TODOForm()
+    if form.validate_on_submit():
+        print("<@app.route/todo> Form submition hooked")
+        user = User.query.filter_by(username=session.get("user")).first()
+        if user:
+            print("<@app.route/todo> Found user from db.query")
+            user_id = user.id
+            title = form.title.data
+            description = form.description.data
+            due_date = form.due_date.data
+            todo = Todo(user_id=user.id, title=title, description=description, due_date=due_date, status=False)
+            db.session.add(todo)
+            db.session.commit()
+            return redirect(url_for("todo"))
+
+    if session.get("user"):
+        print("<@app.route/todo> Confirmed user")
+        return render("routes/todo.html", route=request.path, form=form, todo_list=reversed(db.session.query(Todo).all()))
+
+    return redirect(url_for("login"))
+
+@app.route("/todo_status/<int:id>")
+def todo_status(id):
+    todo = Todo.query.get(id)
+    todo.status = not todo.status
+    db.session.commit()
+    return redirect(url_for("todo"))
+
+@app.route("/todo_remove/<int:id>")
+def todo_remove(id):
+    db.session.delete(Todo.query.get(id))
+    db.session.commit()
+    return redirect(url_for("todo"))
 
 @app.route("/", methods=["GET", "POST"])
 def root():

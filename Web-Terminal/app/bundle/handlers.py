@@ -92,5 +92,13 @@ def post_handle():
                         return redirect(url_for("wipe_cookie"))
         case "feedback":
             return redirect(url_for("feedback"))
+        case "todo":
+            return redirect(url_for("todo")
+            ) if session.get("user") else render_template(
+                "exceptions/permissions.html",
+                user=session.get("user"),
+                route=request.path,
+                exception="You don't have enough permissions to execute this command."
+                )
         case _:
             pass

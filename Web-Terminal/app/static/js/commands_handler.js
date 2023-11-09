@@ -1,6 +1,6 @@
 // commands.js
-const valid_folders = ["/", "about", "gamehacking", "gallery", "system", "skills", "whoami", "login", "feedback"];
-const valid_commands = ["system", "skills", "whoami", "exit", "cookies", "feedback"];
+const valid_folders = ["/", "about", "gamehacking", "gallery", "system", "skills", "whoami", "feedback", "todo"];
+const valid_commands = ["system", "skills", "whoami", "exit", "cookies", "feedback", "todo"];
 
 function updateCaretPosition() {
     const textarea = document.getElementById('commandInput');

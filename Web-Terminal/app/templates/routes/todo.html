@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}./todo{% endblock %}
+
+{% macro render_field(field, placeholder='') %}
+    {% if field.id == 'title' %}
+        {{ field.label }} <br>
+        {{ field }} <br> <br>
+    {% elif field.id == 'description' %}
+      {{ field.label }} <br>
+      {{ field }} <br> <br>
+    {% elif field.id == 'due_date' %}
+      {{ field.label }}
+      {{ field }}
+    {% else %}
+        <a class="arrow arrow-right"><b>{{ field }}</b></a> <br> <br>
+        <hr>
+    {% endif %}
+    {% if field.errors %}
+        <ul class="errors">
+            {% for error in field.errors %}
+                <li class="text-error">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
+{% block content %}
+  <div id="initial_message">
+    <p class="text-description">
+        Welcome to <span class="text-important"><strong>TODO</strong></span> page.
+      <a class="arrow arrow-right" href="{{url_for('root')}}"><b>Home</b></a>
+    </p>
+    <hr>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          {% for message in messages %}
+            <a class="text-error">{{ message }}</a>
+          {% endfor %}
+          <hr>
+      {% endif %}
+    {% endwith %}
+  </div>
+  {% block output %}{% endblock %}
+{% endblock %}
+
+{% block main %}
+  <form method="POST" novalidate>
+    {{ form.csrf_token }}
+    {{ render_field(form.title) }}
+    {{ render_field(form.description) }}
+    {{ render_field(form.due_date) }}
+    {{ render_field(form.submit) }}
+  </form>
+
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th><span class="text-description">Due date</span></th>
+            <th><span class="text-description">Title</span></th>
+            <th><span class="text-description">Description</span></th>
+            <th><span class="text-description">Status</span></th>
+            <th><span class="text-description">Action</span></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for task in todo_list %}
+              <tr>
+                <th><span class="text-default">{{ task.due_date }}</span></th>
+                <td><span class="text-command">{{ task.title }}</span></td>
+                <td><span class="text-command">{{ task.description }}</span></td>
+                <td>
+                  <span class="{{ 'text-important' if task.status else 'text-highlighed-error' }}">
+                  {{ "READY" if task.status else "PENDING" }}
+                  </span>
+                </td>
+                <td>
+                  <a href="/todo_status/{{ task.id }}">{{ "✎" if task.status else "✔" }}</a>
+                  <!--<a href="#">✎</a>-->
+                  <a href="/todo_remove/{{ task.id }}">✘</a>
+                </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+{% endblock %}

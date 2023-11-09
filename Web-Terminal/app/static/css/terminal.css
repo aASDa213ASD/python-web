@@ -173,6 +173,11 @@ pre {
     color: #B89076;
 }
 
+.text-highlighed-error {
+    color: rgb(196, 61, 61);
+    text-shadow: 0 0 5px #ba0000; 
+}
+
 .gallery-wrapper {
     position: relative;
     flex-grow: 1;
@@ -349,4 +354,18 @@ input[type="checkbox"]:disabled {
     display: grid;
     grid-template-columns: 1em auto;
     gap: 1em;
+}
+
+input[type="date"] {
+    padding: 4px;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #101010;
+    color: #4cb469;
+    text-shadow: 0 0 5px #22865e; 
+}
+
+input[type="date"]:focus {
+    border: none;
 }
