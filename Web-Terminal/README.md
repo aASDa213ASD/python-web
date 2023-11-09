@@ -1,4 +1,19 @@
 ## Flask Web-Terminal Portfolio
+> # Update 5: <br>
+> <b>- `Fix`: Forgot to query `TODOs` by `user.id`, now works as intended.</b> <br>
+> <b>- Moved some configurations to `config.py` file.</b> <br>
+> <b>- Rewrote password hash checking logic, now lays in User class.</b> <br>
+> <b>- Added `register` command that allows anyone to create an account.</b> <br>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1172178810410639371/image.png?ex=655f5f96&is=654cea96&hm=e452240c7e0813d13ab0a012030601cdc69cd2264e3b5bdc7468f2f7fff382b9&=&width=878&height=905" alt="">
+</picture>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1172179060185649183/image.png?ex=655f5fd1&is=654cead1&hm=8a33797fc3b85634be692e9bd7835486abc9111a1ba40d6dfafdd4de34d1e384&" alt="">
+</picture>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1172185990132150362/image.png?ex=655f6646&is=654cf146&hm=40e9e6adbd844731030ca88a5e6ab0b23255aa773b6c93b86702d716e24beeba&" alt="">
+</picture>
+
 > # Update 4: <br>
 > <b>- New `migrations` for TODO list table.</b> <br>
 > <b>- Added command `todo` / `cd todo`.</b> <br>

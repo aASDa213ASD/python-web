@@ -8,7 +8,7 @@ from re import compile as re_compile
 from json import loads as json_loads
 from flask import redirect, render_template, request, session, url_for, make_response, flash
 
-from .forms import FeedbackForm, LoginForm, ChangePasswordForm, TODOForm
+from .forms import FeedbackForm, LoginForm, ChangePasswordForm, TODOForm, RegisterForm
 
 from app import app
 from app import bcrypt
@@ -150,6 +150,25 @@ def gallery():
         return handle
     return render("routes/gallery.html", route=request.path)
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if session.get("user"):
+        return redirect(url_for("whoami"))
+    
+    form = RegisterForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        new_user = User(username=username, password=password)
+
+        db.session.add(new_user)
+        db.session.commit()
+        flash("Your account has been created.", category="flash-success")
+
+        return redirect(url_for("login"))
+    
+    return render("routes/register.html", route=request.path, form=form)
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if session.get("user"):
@@ -160,9 +179,8 @@ def login():
         username = form.username.data
         password = form.password.data
         remember_flag = form.remember.data
-
         user = User.query.filter_by(username=username).first()
-        if user and bcrypt.check_password_hash(user.password, password):
+        if user and user.validate_pwd(password):
             if remember_flag:
                 session['user_id'] = user.id
                 session['user'] = user.username
@@ -230,12 +248,13 @@ def passwd():
 def todo():
     print("<@app.route/todo> Begin")
     form = TODOForm()
+    if session.get("user"):
+        user = User.query.filter_by(username=session.get("user")).first()
+        return render("routes/todo.html", route=request.path, form=form, todo_list=reversed(db.session.query(Todo).filter_by(user_id=user.id).all()))
+
     if form.validate_on_submit():
-        print("<@app.route/todo> Form submition hooked")
         user = User.query.filter_by(username=session.get("user")).first()
         if user:
-            print("<@app.route/todo> Found user from db.query")
-            user_id = user.id
             title = form.title.data
             description = form.description.data
             due_date = form.due_date.data
@@ -243,10 +262,6 @@ def todo():
             db.session.add(todo)
             db.session.commit()
             return redirect(url_for("todo"))
-
-    if session.get("user"):
-        print("<@app.route/todo> Confirmed user")
-        return render("routes/todo.html", route=request.path, form=form, todo_list=reversed(db.session.query(Todo).all()))
 
     return redirect(url_for("login"))
 

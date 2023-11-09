@@ -100,5 +100,7 @@ def post_handle():
                 route=request.path,
                 exception="You don't have enough permissions to execute this command."
                 )
+        case "register":
+            return redirect(url_for("register"))
         case _:
             pass
