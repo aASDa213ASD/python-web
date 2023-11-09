@@ -1,4 +1,10 @@
 ## Flask Web-Terminal Portfolio
+> # Update 5.1: <br>
+> <b>- Added `users` command to list all registered users.</b> <br>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1172190645478228088/image.png?ex=655f6a9c&is=654cf59c&hm=cb9479261ad0b3267c1a1ea3d7a08be6c20ef4ec2a7da5b7652f8d82109a2a97&" alt="">
+</picture>
+
 > # Update 5: <br>
 > <b>- `Fix`: Forgot to query `TODOs` by `user.id`, now works as intended.</b> <br>
 > <b>- Moved some configurations to `config.py` file.</b> <br>

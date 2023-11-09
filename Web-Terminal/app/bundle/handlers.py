@@ -102,5 +102,7 @@ def post_handle():
                 )
         case "register":
             return redirect(url_for("register"))
+        case "users":
+            return redirect(url_for("users"))
         case _:
             pass

@@ -278,6 +278,15 @@ def todo_remove(id):
     db.session.commit()
     return redirect(url_for("todo"))
 
+@app.route("/users", methods=["GET", "POST"])
+def users():
+    if request.method == "POST" and (handle := post_handle()):
+        return handle
+    
+    registered_users = [username for (username,) in User.query.with_entities(User.username).all()]
+
+    return render("routes/users.html", route=request.path, user_list=registered_users)
+
 @app.route("/", methods=["GET", "POST"])
 def root():
     if request.method == "POST" and (handle := post_handle()):

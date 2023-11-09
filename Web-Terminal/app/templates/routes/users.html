@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}./users{% endblock %}
+
+{% block content %}
+  <div id="initial_message">
+    <p class="text-description">We are aware of next list of <span class="text-important">users</span> registered in <span class="text-important">this web-terminal.</span></p>
+    <hr>
+    {% for user in user_list %}
+      <p>{{ user }}</p>
+    {% endfor %}
+  </div>
+  {% block output %}{% endblock %}
+{% endblock %}
