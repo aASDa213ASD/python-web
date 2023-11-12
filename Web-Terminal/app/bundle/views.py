@@ -7,12 +7,38 @@ from platform import version as platform_ver
 from re import compile as re_compile
 from flask import redirect, render_template, request, session, url_for, make_response, flash
 from flask_login import login_user, current_user, logout_user, login_required
-from .forms import FeedbackForm, LoginForm, ChangePasswordForm, TODOForm, RegisterForm
-
+from .forms import FeedbackForm, LoginForm, ChangePasswordForm, TODOForm, RegisterForm, UpdateAccountForm
+from secrets import token_hex
 from app import app
 from app import bcrypt
 from app.bundle.handlers import post_handle
 from app.bundle.models import db, User, Feedback, Todo
+from PIL import Image
+import os
+
+@app.after_request
+def update_last_seen(response):
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        try:
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            flash(f"Error while updating user last seen: {str(e)}", "danger")
+    return response
+
+""" Pfp helper function"""
+def save_picture(form_pfp):
+    random_hex = token_hex(8)
+    f_name, f_ext = os.path.splitext(form_pfp.filename)
+    pfp_fn = random_hex + f_ext
+    pfp_path = os.path.join(app.root_path, 'static/images/pfps', pfp_fn)
+    image = Image.open(form_pfp)
+    image.thumbnail((360, 360))
+    image.save(pfp_path)
+    return pfp_fn
+    #form_pfp.save(pfp_path)
+    #return pfp_fn
 
 """ Render helper function """
 def render(template: str, **kwargs):
@@ -197,12 +223,23 @@ def login():
 @app.route("/whoami", methods=["GET", "POST"])
 @login_required
 def whoami():
-    if request.method == "POST" and (handle := post_handle()):
-        return handle
+    form = UpdateAccountForm()
+    form.username.default = current_user.username
+    form.bio.default = current_user.bio
+
+    if form.validate_on_submit():
+        if form.pfp.data:
+            pfp_file = save_picture(form.pfp.data)
+            current_user.pfp = pfp_file
+        current_user.username = form.username.data
+        current_user.bio = form.bio.data
+        db.session.commit()
+        return redirect(url_for("whoami"))
     
     if current_user.is_authenticated:
         """ Deprecated request.cookies, use LoginManager instead """
-        return render("routes/whoami.html", route=request.path, cookies=request.cookies)
+        form.process()
+        return render("routes/whoami.html", route=request.path, cookies=request.cookies, form=form)
     
     return redirect(url_for("login"))
 
@@ -288,7 +325,8 @@ def todo_remove(id):
 def users():
     if request.method == "POST" and (handle := post_handle()):
         return handle
-    registered_users = [username for (username,) in User.query.with_entities(User.username).all()]
+    registered_users = User.query.all()
+    #registered_users = [username for (username,) in User.query.with_entities(User.username).all()]
     return render("routes/users.html", route=request.path, user_list=registered_users)
 
 @app.route("/", methods=["GET", "POST"])

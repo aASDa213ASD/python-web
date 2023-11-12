@@ -1,4 +1,19 @@
 ## Flask Web-Terminal Portfolio
+> # Update 7: <br>
+> <b>- Modified `/users` path to display user's pfp. </b> <br>
+> <b>- User's pfp now can be seen in a prompt of a terminal on any page where it's available. </b> <br>
+> <b>- Modified `/whoami` path to allow user to edit his name, profile picture and bio. </b> <br>
+> <b>- Added `last_seen` field to User model along with `@after_request` hook. </b> <br>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1173347244657877173/image.png?ex=65639fc6&is=65512ac6&hm=dbc48d17a59bbde4f4df30a50411236dc2ed8f908cfe8b0bc8eb9ae0522315be&" alt="">
+</picture>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1173347329487683664/image.png?ex=65639fdb&is=65512adb&hm=d3507cbd597ee38d97355d816115689a28593b08be2b08dcb2277f0a5843e125&" alt="">
+</picture>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1173348206986412102/image.png?ex=6563a0ac&is=65512bac&hm=c73904f5dc78e7ccf7550e00a670f4cf8a193b3d0b213e1973bc73b1feecee4c&" alt="">
+</picture>
+
 > # Update 6: <br>
 > <b>- Tuned `__init.py__` for `LoginManager`. </b> <br>
 > <b>- Tuned `handlers.py` for `LoginManager`. </b> <br>

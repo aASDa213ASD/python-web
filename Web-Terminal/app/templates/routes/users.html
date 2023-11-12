@@ -7,7 +7,11 @@
     <p class="text-description">We are aware of next list of <span class="text-important">users</span> registered in <span class="text-important">this web-terminal.</span></p>
     <hr>
     {% for user in user_list %}
-      <p>{{ user }}</p>
+    <p>
+      <img class="rounded-circle" style="width: 38px; margin-right: 15px;" src="{{ url_for('static', filename='images/pfps/' + user.pfp) }}">
+      <span class="text-important">{{ user.username }}</span> | <span class="text-description">Last seen:</span> {{ user.last_seen if user.last_seen else "Never" }}
+    </p>
+    <br>
     {% endfor %}
   </div>
   {% block output %}{% endblock %}

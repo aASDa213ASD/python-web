@@ -193,7 +193,7 @@ pre {
     align-items: center;
 }
   
-img {
+.gallery-img {
     z-index: 1;
     grid-column: span 2;
     max-width: 100%;
@@ -285,11 +285,11 @@ td, th {
     border-radius: 0.4rem;
     cursor: pointer;
     color: white;
+    padding: 20px;
 }
 
 .wtf-form-textarea:focus {
     outline: 0;
-    padding: 20px;
 }
 
 .feedback-div {

@@ -4,7 +4,9 @@ from flask_login import UserMixin
 from app import bcrypt
 from app import login_manager
 
+
 db = SQLAlchemy()
+
 
 @login_manager.user_loader
 def user_loader(user_id):
@@ -17,10 +19,14 @@ class Feedback(db.Model):
   feedback = db.Column(db.String(255))
   date = db.Column(db.DateTime, default=datetime.now().replace(microsecond=0))
 
+
 class User(db.Model, UserMixin):
   id = db.Column(db.Integer, primary_key=True) 
   username = db.Column(db.String(50), unique=True, nullable=False)
   password = db.Column(db.String(60), nullable=False)
+  bio = db.Column(db.String(255))
+  last_seen = db.Column(db.DateTime)
+  pfp = db.Column(db.String(20), nullable=False, default="anonymous.png")
 
   def __init__(self, username: str, password: str) -> None:
     self.username = username
@@ -40,6 +46,7 @@ class User(db.Model, UserMixin):
   
   def validate_pwd(self, pwd_to_validate):
     return bcrypt.check_password_hash(self.password, pwd_to_validate)
+
 
 class Todo(db.Model):
   id = db.Column(db.Integer, primary_key=True)

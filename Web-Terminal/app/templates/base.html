@@ -22,6 +22,7 @@
         <form method="post" id="shell">
             <div class="caret-block" style="display: flex; align-items: center;">
                 {% if current_user and current_user.is_authenticated and route %}
+                  <img class="rounded-circle" style="width: 38px; margin-right: 15px;" src="{{ url_for('static', filename='images/pfps/' + current_user.pfp) }}">
                   <span style="margin-right: 5px;">{{ current_user.username }}@asd<span class="text-command">:{{ route }}$</span></span>
                 {% elif route %}
                   <span style="margin-right: 5px;">guest@asd<span class="text-command">:{{ route }}$</span></span>

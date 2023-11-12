@@ -6,10 +6,43 @@
   <div id="initial_message">
     <p class="text-description">
       Welcome, <span class="text-important"><strong>{{ current_user.username }}</strong></span>.
+      <a class="arrow arrow-right" href="{{url_for('root')}}"><b>Home</b></a>
+      &nbsp;<a><span class="text-important">|</span></a>
       <a class="arrow arrow-right" href="{{url_for('exit')}}"><b>Exit</b></a>
     </p>
     <hr>
     
+    <div>
+      <form method="POST" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div class="row">
+          <div class="col-md-5 text-center">
+              <h5><span class="text-important"> {{ form.username.label }} </span><br></h5>
+              <p><h5><span class="text-important">──────────────</span></h5></p>
+              {{ form.username }} <br> <br>
+
+              <!-- <p><h3><span class="text-important">{{ current_user.username }}#{{ current_user.id }}</span></h3></p>-->
+              <!-- TODO: better separator -->
+              <hr>
+              <!-- TODO: current_user.about_me -->
+              <h5><p><span class="text-important">{{ form.bio.label }}</span></p></h5>
+              <p><h5><span class="text-important">────────────────────────────────────────</span></h5></p>
+              <p><span class="text-description">{{ form.bio }}</span></p>
+          </div>
+          <div class="col-md-3 text-center">
+            <h5><span class="text-important">{{ form.pfp.label }}</span></h5>
+            <p><h5><span class="text-important">──────────────</span></h5></p>
+            <img class="rounded-circle" src="{{ url_for('static', filename='images/pfps/' + current_user.pfp) }}" alt="Profile Picture">
+            <hr>
+            {{ form.pfp }}
+            <br>
+            <br>
+            <a class="arrow arrow-right"><b>{{ form.submit }}</b></a> <br>
+          </div>
+      </div>
+      </form>
+    </div>
+    <!--
     <strong>
       <span class="text-description">
         <span class="text-important">Cookie</span> table:
@@ -30,6 +63,10 @@
       </tr>
       {% endfor %}
     </table>
+    -->
   </div>
   {% block output %}{% endblock %}
+{% endblock %}
+
+{% block main %}
 {% endblock %}
