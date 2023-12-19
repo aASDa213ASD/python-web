@@ -15,6 +15,9 @@ from app.bundle.handlers import post_handle
 from app.bundle.models import db, User, Feedback, Todo
 from PIL import Image
 import os
+from ..api.views import api_blueprint
+from flask_jwt_extended import create_access_token
+
 
 @app.after_request
 def update_last_seen(response):
@@ -37,8 +40,6 @@ def save_picture(form_pfp):
     image.thumbnail((360, 360))
     image.save(pfp_path)
     return pfp_fn
-    #form_pfp.save(pfp_path)
-    #return pfp_fn
 
 """ Render helper function """
 def render(template: str, **kwargs):
@@ -209,11 +210,14 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and user.validate_pwd(password):
             if remember_flag:
+                access_token = create_access_token(identity=username)
                 login_user(user, remember_flag)
                 #session['user_id'] = user.id
                 #session['user'] = user.username
                 #session['remember'] = remember_flag
-                return redirect(url_for("whoami"))
+                response = redirect(url_for("whoami"))
+                response.set_cookie('access_token', access_token)
+                return response
             else:
                 return redirect(url_for("root"))
         else:
@@ -269,12 +273,14 @@ def exit():
     return redirect(url_for("root"))
 
 @app.route("/passwd", methods=["GET", "POST"])
+@login_required
 def passwd():
     form = ChangePasswordForm()
     if form.validate_on_submit():
         new_pwd = form.password.data
         confirm_pwd = form.confirm_password.data
-        user = User.query.filter_by(username=session.get("user")).first()
+        user = User.query.filter_by(username=current_user.username).first()
+
         if user:
             new_pwd = bcrypt.generate_password_hash(new_pwd).decode('utf-8')
             user.password = new_pwd
@@ -282,21 +288,18 @@ def passwd():
             db.session.add(user)
             db.session.commit()
 
-            session.pop("user") # <- Log him out
+            logout_user()
             return redirect(url_for("login"))
-    
+        
     return render("routes/passwd.html", route=request.path, form=form)
 
 @app.route("/todo", methods=["GET", "POST"])
 @login_required
 def todo():
     form = TODOForm()
-    if current_user.is_authenticated:
-        user = User.query.filter_by(username=session.get("user")).first()
-        return render("routes/todo.html", route=request.path, form=form, todo_list=reversed(db.session.query(Todo).filter_by(user_id=current_user.id).all()))
-
     if form.validate_on_submit():
-        user = User.query.filter_by(username=session.get("user")).first()
+        user = User.query.filter_by(username=current_user.username).first()
+        print(f"[TODO Validated] User from DB: {user}")
         if user:
             title = form.title.data
             description = form.description.data
@@ -305,6 +308,11 @@ def todo():
             db.session.add(todo)
             db.session.commit()
             return redirect(url_for("todo"))
+    
+    if current_user.is_authenticated:
+        user = User.query.filter_by(username=current_user.username).first()
+        print(f"[TODO Unvalidated] User from DB: {user}")
+        return render("routes/todo.html", route=request.path, form=form, todo_list=reversed(db.session.query(Todo).filter_by(user_id=current_user.id).all()))
 
     return redirect(url_for("login"))
 
@@ -334,3 +342,5 @@ def root():
     if request.method == "POST" and (handle := post_handle()):
         return handle
     return render("routes/root.html", route="~")
+
+app.register_blueprint(api_blueprint, url_prefix='/api')

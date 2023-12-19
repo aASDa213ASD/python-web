@@ -66,7 +66,7 @@ def post_handle():
         case "passwd":
             return redirect(
                 url_for("passwd")
-            ) if session.get("user") else render_template(
+            ) if current_user.is_authenticated else render_template(
                 "exceptions/permissions.html",
                 user=session.get("user"),
                 route=request.path,

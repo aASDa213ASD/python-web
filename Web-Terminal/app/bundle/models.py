@@ -55,3 +55,10 @@ class Todo(db.Model):
   description = db.Column(db.String(200))
   due_date = db.Column(db.Date())
   status = db.Column(db.Boolean)
+
+
+class PhoneCall(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    caller = db.Column(db.String(50), nullable=False)
+    recipient = db.Column(db.String(50), nullable=False)
+    duration = db.Column(db.Integer, nullable=False)
