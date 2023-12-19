@@ -1,4 +1,29 @@
 ## Flask Web-Terminal Portfolio
+> # Update 8: <br>
+> <b>- Added RESTful API for Phone Calls. </b> <br>
+> <b>- Protected API endpoints with JWT. </b> <br>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1186654570122850404/image.png?ex=65940930&is=65819430&hm=ebe81240fb489a503c21ba16a0ad3b964fb9c3af624edc540c336302b6ba41da&=&format=webp&quality=lossless&width=1153&height=246" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1186654765254455377/image.png?ex=6594095f&is=6581945f&hm=a6e21aeb39542f80124c36f1e5743e50941140e166199ed3573fe51317df2b82&=&format=webp&quality=lossless&width=1152&height=259" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1186654798850838618/image.png?ex=65940967&is=65819467&hm=4588117a6e05c0d09a863ed4afaa39afff5426bd3443f1ef737ccdf72c5102a1&=&format=webp&quality=lossless&width=1150&height=477" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1186655049158508636/image.png?ex=659409a2&is=658194a2&hm=696395ec486a147a3020dfc02bcc8d4e07fdb7d28b67d9931750d0ad22d341b7&=&format=webp&quality=lossless&width=1150&height=220" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1186655117928321124/image.png?ex=659409b3&is=658194b3&hm=402eddfa17601307c184857a54c033bc9b4209adc90efb7a3e36943571173e80&=&format=webp&quality=lossless&width=1155&height=458" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1186655320500613150/image.png?ex=659409e3&is=658194e3&hm=15b32ac91c9c9d6850ca6a7d0c3bc05a815984f8273887a901d5809b6d7b08a1&=&format=webp&quality=lossless&width=1156&height=301" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1186655370584793148/image.png?ex=659409ef&is=658194ef&hm=f2021e7ea05b8459e5a314d9ae03e02d54a44165bb29dd333fc730e35bb8b288&=&format=webp&quality=lossless&width=1153&height=393" alt="">
+</picture>
+
 > # Update 7: <br>
 > <b>- Modified `/users` path to display user's pfp. </b> <br>
 > <b>- User's pfp now can be seen in a prompt of a terminal on any page where it's available. </b> <br>
