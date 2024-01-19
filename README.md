@@ -21,3 +21,18 @@
    2. Create virtual environment in project: `python -m venv <venv_name>` & `source <venv_name>\bin\activate`
    3. Install prerequisites with: `pip install -r requirements.txt`
    4. Run project with corresponding `.py` file.
+
+> # Terminal database installation
+
+## Config.py
+Contains link to postgres db, can be any other (**maria** / **mysql** / **etc.**)
+
+```python
+SQLALCHEMY_DATABASE_URI = "postgresql://postgres:<password>@localhost/<database_name>"
+```
+
+```bash
+flask db init
+flask db migrate -m "Transfer"
+flask db upgrade
+```
