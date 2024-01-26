@@ -1,4 +1,12 @@
 ## Flask Web-Terminal Portfolio
+> # Update 9: <br>
+> <b>- Refactored to blueprints.</b> <br>
+> <b>- Refactored to use app fabric</b> <br>
+> <b>- Technically whole project went upside down and was remade from ground to fit blueprints requirement</b> <br>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200265966030946335/image.png?ex=65c58dca&is=65b318ca&hm=98cd9475da549f8d90178da2e538feb9c9d7a9a89e1f279c454df79ba01ef4e6&=&format=webp&quality=lossless&width=1300&height=936" alt="">
+</picture>
+
 > # Update 8: <br>
 > <b>- Added RESTful API for Phone Calls. </b> <br>
 > <b>- Protected API endpoints with JWT. </b> <br>
