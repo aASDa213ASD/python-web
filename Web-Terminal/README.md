@@ -1,7 +1,33 @@
 ## Flask Web-Terminal Portfolio
+> # Update 13: <br>
+> <b>- API implementation of CRUD for TODO items</b> <br>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200336484000084018/image.png?ex=65c5cf76&is=65b35a76&hm=c5533e6eb764e76493a064f2d8e764c974b7a6fbc52e042548b73a6068289c5d&=&format=webp&quality=lossless&width=1237&height=936" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200337498967113749/image.png?ex=65c5d068&is=65b35b68&hm=31a96e3594fcf3bb0caf3d2baedca5d0d5ec91241786aaf287abf5b816a13f33&=&format=webp&quality=lossless&width=1034&height=936" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200337714579509378/image.png?ex=65c5d09c&is=65b35b9c&hm=3487189fc64f080a52ba93509b4a855d3f4126b4cd213d2f74e2108b778ee484&=&format=webp&quality=lossless&width=1888&height=936" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200337874202132660/image.png?ex=65c5d0c2&is=65b35bc2&hm=f09a70053e7a8f20eea930f2ca434436c569847fae9c5ee3cdac7058ad1ecf03&=&format=webp&quality=lossless&width=1013&height=936" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200338093832687667/image.png?ex=65c5d0f6&is=65b35bf6&hm=7ea7a77a3993c11e46a1be77e34d62ab4a8f087d7dcf51f2814f2caa83afb201&=&format=webp&quality=lossless&width=1204&height=936" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200338387928879164/image.png?ex=65c5d13c&is=65b35c3c&hm=9790ffc4a26a46868ddcb7c78d295c6be7577f2672cda3921878e1e0a2933dde&=&format=webp&quality=lossless&width=1146&height=936" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200338423949570109/image.png?ex=65c5d145&is=65b35c45&hm=9e882941922d4596268af457bbf62a36ef732f5f47db0374106bac8c5913acd1&=&format=webp&quality=lossless&width=953&height=936" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200338547027222619/image.png?ex=65c5d162&is=65b35c62&hm=6692edffc4edc42123adaebcb4f9fb34dce182a0682e6e37ca2a068775d53341&=&format=webp&quality=lossless&width=1169&height=936" alt="">
+</picture>
+
 > # Update 12 (Problems arrived): <br>
 > <b>- Test on pytest</b> <br>
-
 
 > # Update 11: <br>
 > <b>- Test on flask_testing and unittest</b> <br>
