@@ -17,10 +17,12 @@ migrate = Migrate()
 def create_app(config_name: str = "dev"):
     app = Flask(__name__)
     
-    from config import Development, Production
+    from config import Development, Production, Testing
 
     if config_name == "prod":
         app.config.from_object(Production)
+    elif config_name == "test":
+        app.config.from_object(Testing)
     else:
         app.config.from_object(Development)
 

@@ -16,3 +16,9 @@ class Development(Config):
 
 class Production(Config):
     DEBUG = False
+
+
+class Testing(Config):
+    TESTING          = True
+    DEBUG            = True
+    WTF_CSRF_ENABLED = False
