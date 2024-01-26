@@ -5,12 +5,11 @@ from flask_login import LoginManager
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
-#from .api.views import api_blueprint
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
-api = Api()
+api_instance = Api()
 jwt = JWTManager()
 migrate = Migrate()
 
@@ -31,7 +30,7 @@ def create_app(config_name: str = "dev"):
     login_manager.init_app(app)
     login_manager.login_view = 'accounts.login'
     login_manager.login_message_category = 'info'
-    api.init_app(app)
+    api_instance.init_app(app)
     jwt.init_app(app)
 
     with app.app_context():
@@ -40,12 +39,13 @@ def create_app(config_name: str = "dev"):
         from .bundle.cookies.views import cookies
         from .bundle.feedback.views import feedback
         from .bundle.todo.views import todo
-        
+        from .bundle.api.views import api
+
         app.register_blueprint(main)
         app.register_blueprint(accounts)
         app.register_blueprint(cookies)
         app.register_blueprint(feedback)
         app.register_blueprint(todo)
-        #app.register_blueprint(api_blueprint, url_prefix='/api')
+        app.register_blueprint(api, url_prefix='/api')
 
     return app

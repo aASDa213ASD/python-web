@@ -1,10 +1,9 @@
+from . import api
 from flask import Blueprint, request
 from flask_restful import Resource, Api
-from ..bundle.models import db, PhoneCall
 from flask_jwt_extended import jwt_required
-
-api_blueprint = Blueprint('api', __name__)
-api = Api(api_blueprint)
+from .models import db, PhoneCall
+from app import api_instance
 
 class PhoneCallResource(Resource):
     @jwt_required()
@@ -29,6 +28,7 @@ class PhoneCallResource(Resource):
         db.session.commit()
         return {"message": "Phone call deleted successfully"}
 
+
 class PhoneCallListResource(Resource):
     @jwt_required()
     def get(self):
@@ -43,5 +43,7 @@ class PhoneCallListResource(Resource):
         db.session.commit()
         return {"message": "Phone call created successfully", "id": new_phonecall.id}
 
-api.add_resource(PhoneCallListResource, '/phonecalls')
-api.add_resource(PhoneCallResource, '/phonecalls/<int:phonecall_id>')
+
+api_instance = Api(api)
+api_instance.add_resource(PhoneCallListResource, '/phonecalls')
+api_instance.add_resource(PhoneCallResource, '/phonecalls/<int:phonecall_id>')
