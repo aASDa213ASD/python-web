@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}./login{% endblock %}
+
+{% macro render_field(field, placeholder='') %}
+    {% if field.type == 'BooleanField' %}
+        <label class="login-form">
+          {{ field }}
+          <span class="text-important">{{ field.label }}</span>
+        </label>
+        <br><br>
+    {% elif field.type == 'PasswordField' or field.type == 'StringField' %}
+        {{ field.label }} <br>
+        {{ field }} <br> <br>
+    {% else %}
+        <hr>
+        <a class="arrow arrow-right"><b>{{ field }}</b></a> <br> <br>
+    {% endif %}
+    {% if field.errors %}
+        <ul class="errors">
+            {% for error in field.errors %}
+                <li class="text-error">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
+{% block content %}
+  <div id="initial_message">
+    <p class="text-description">
+        Welcome to <span class="text-important"><strong>login</strong></span> page.
+      <a class="arrow arrow-right" href="{{url_for('accounts.exit')}}"><b>Home</b></a>
+    </p>
+    <hr>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          {% for message in messages %}
+            <a class="text-error">{{ message }}</a>
+          {% endfor %}
+          <hr>
+      {% endif %}
+    {% endwith %}
+  </div>
+  {% block output %}{% endblock %}
+{% endblock %}
+
+{% block main %}
+    <form method="POST" novalidate>
+      {{ form.csrf_token }}
+      {{ render_field(form.username) }}
+      {{ render_field(form.password) }}
+      {{ render_field(form.remember) }}
+      {{ render_field(form.submit) }}
+    </form>
+{% endblock %}

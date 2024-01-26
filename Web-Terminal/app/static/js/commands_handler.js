@@ -1,10 +1,10 @@
 // commands.js
-const valid_folders = ["/", "about", "gamehacking", "gallery", "system", "skills", "whoami", "feedback", "todo"];
-const valid_commands = ["system", "skills", "whoami", "exit", "cookies", "feedback", "todo", "register", "users"];
+const valid_folders = ["/", "about", "gamehacking", "gallery", "system", "whoami", "feedback", "todo"];
+const valid_commands = ["skills", "whoami", "exit", "cookies", "feedback", "todo", "register", "users"];
 
-function updateCaretPosition() {
-    const textarea = document.getElementById('commandInput');
-    const caret = document.getElementById('customCaret');
+function update_caret_position() {
+    const textarea = document.getElementById('command_input');
+    const caret = document.getElementById('custom_caret');
 
     const textWidth = getTextWidth(textarea.value, window.getComputedStyle(textarea).font);
     const textareaRect = textarea.getBoundingClientRect();
@@ -20,7 +20,7 @@ function getTextWidth(text, font) {
     return metrics.width;
 }
 
-function clearConsole() {
+function clear_terminal() {
     const initial_message = document.getElementById("initial_message");
     const output = document.getElementById("command_output");
 
@@ -31,14 +31,14 @@ function clearConsole() {
     catch (error) {}
 }
 
-async function asyncFetch(route) {
+async function fetch_async(route) {
     const response = await fetch(route);
     const text = await response.text();
     const output = document.getElementById("command_output");
     output.innerHTML = output.innerHTML + text;
 }
 
-function showInvalidRoute(route) {
+function throw_invalid_route(route) {
     const text = "<p class='text-description'>Route '" + route + "' does not exist</p>";
     const output = document.getElementById("command_output");
     output.innerHTML = output.innerHTML + text;
@@ -53,19 +53,19 @@ function showCommandNotFound(command) {
     output.innerHTML = output.innerHTML + text;
 }
 
-function showInvalidUser(username) {
+function throw_invalid_user(username) {
     const text = "<p class='text-description'>User <span class='text-important'>'" + username + "'</span> does not exist</p>";
     const output = document.getElementById("command_output");
     output.innerHTML = output.innerHTML + text;
 }
 
-function showAuthenticationFailure() {
+function display_auth_failure() {
     const text = "<p class='text-description'>Authentication failure</p>";
     const output = document.getElementById("command_output");
     output.innerHTML = output.innerHTML + text;
 }
 
-function showUserCredentials(username) {
+function display_user_credentials(username) {
     const jsonFilePath = 'static/json/users.json';
 
     fetch(jsonFilePath)
@@ -84,12 +84,12 @@ function showUserCredentials(username) {
                 output.innerHTML = output.innerHTML + text;
             } 
             else
-                showInvalidUser(username);
+                throw_invalid_user(username);
         })
         .catch(error => console.error('Error fetching JSON file:', error));
 }
 
-function validateCredentials(username, password) {
+function validate_credentials(username, password) {
     const jsonFilePath = 'static/json/users.json';
 
     return fetch(jsonFilePath)
@@ -116,22 +116,22 @@ document.querySelector("form").onsubmit = async function(e) {
             if (cmd.length > 1 && valid_folders.includes(cmd[1].trim()) || cmd.length === 1)
                 submitForm = true;
             else
-                showInvalidRoute(cmd[1]);
+                throw_invalid_route(cmd[1]);
             break;
         case "ls":
-            asyncFetch("/ls");
+            fetch_async("/ls");
             break;
         case "help":
-            asyncFetch("/help");
+            fetch_async("/help");
             break;
         case "clear":
-            clearConsole();
+            clear_terminal();
             break;
         case "whois":
-            asyncFetch("/whois");
+            fetch_async("/whois");
             break;
         case "projects":
-            asyncFetch("/projects");
+            fetch_async("/projects");
             break;
         case "passwd":
             if (cmd.length == 1)
@@ -139,18 +139,18 @@ document.querySelector("form").onsubmit = async function(e) {
             else if (cmd.length == 3)
                 submitForm = true;
             else if (cmd.length == 2)
-                showUserCredentials(cmd[1].trim());
+                display_user_credentials(cmd[1].trim());
             else
-                showInvalidUser(cmd[1]);
+                throw_invalid_user(cmd[1]);
             break;
         case "login":
             if (cmd.length >= 3) {
-                await validateCredentials(cmd[1].trim(), cmd[2].trim())
+                await validate_credentials(cmd[1].trim(), cmd[2].trim())
                     .then(isValid => {
                         if (isValid)
                             submitForm = true;
                         else
-                            showAuthenticationFailure();
+                            display_auth_failure();
                     })
                     .catch(error => {
                         console.error('Error validating credentials:', error.message);
@@ -171,10 +171,10 @@ document.querySelector("form").onsubmit = async function(e) {
     else
         input.value = "";
 
-    updateCaretPosition();
+    update_caret_position();
 }
 
-function handleEnterCommand(event) {
+function handle_enter_command(event) {
     if (event.key === "Enter") {
         event.preventDefault();
         document.getElementById("shell").dispatchEvent(new Event("submit"));

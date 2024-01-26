@@ -9,7 +9,7 @@
   {% block head %}{% endblock %}
 </head>
 
-<body onload="updateCaretPosition()">
+<body onload="update_caret_position()">
     <main class="terminal">
       {% block content %}{% endblock %}
 
@@ -27,8 +27,8 @@
                 {% elif route %}
                   <span style="margin-right: 5px;">guest@asd<span class="text-command">:{{ route }}$</span></span>
                 {% endif %}
-                <textarea class="form-control" name="command" id="commandInput" rows="1" wrap="off" maxlength="50" oninput="updateCaretPosition()" onkeydown="handleEnterCommand(event)" autofocus></textarea>
-                <span class="caret" id="customCaret"></span>
+                <textarea class="form-control text-light" name="command" id="command_input" rows="1" wrap="off" maxlength="50" oninput="update_caret_position()" onkeydown="handle_enter_command(event)" autofocus></textarea>
+                <span class="caret" id="custom_caret"></span>
             </div>
         </form>
       </div>
@@ -36,7 +36,7 @@
     </main>
 
   {% block scripts %}
-  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/commands_handler.js') }}"></script>
   {% endblock %}
 
