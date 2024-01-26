@@ -1,9 +1,5 @@
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
-from app import bcrypt
-from app import login_manager
-from app import db
+from app      import db
 
 
 class Feedback(db.Model):

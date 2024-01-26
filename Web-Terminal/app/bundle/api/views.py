@@ -1,9 +1,11 @@
-from . import api
-from flask import Blueprint, request
-from flask_restful import Resource, Api
+from .                  import api
+from .models            import db, PhoneCall
+
+from flask              import request
+from flask_restful      import Resource, Api
 from flask_jwt_extended import jwt_required
-from .models import db, PhoneCall
-from app import api_instance
+from app                import api_instance
+
 
 class PhoneCallResource(Resource):
     @jwt_required()

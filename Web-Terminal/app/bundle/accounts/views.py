@@ -1,19 +1,17 @@
-from . import accounts
-from ..command_handler import handle_request
-from ..render import render
+from .                  import accounts
+from ..command_handler  import handle_request
+from .forms             import LoginForm, ChangePasswordForm, RegisterForm, UpdateAccountForm
+from .models            import User, db
+from ..render           import render
 
-
-from flask_login import login_user, current_user, logout_user, login_required
-from flask import redirect, render_template, request, session, url_for, make_response, flash
-from .forms import LoginForm, ChangePasswordForm, RegisterForm, UpdateAccountForm
-from .models import User, db
+from flask              import redirect, request, url_for, flash, current_app, request
+from flask_login        import login_user, current_user, logout_user, login_required
 from flask_jwt_extended import create_access_token
-from secrets import token_hex
-from PIL import Image
-import os
-from app import bcrypt
-from datetime import datetime
-from flask import current_app, request
+from datetime           import datetime
+from secrets            import token_hex
+from PIL                import Image
+from app                import bcrypt
+from os                 import path
 
 
 @accounts.after_request
@@ -31,9 +29,9 @@ def update_last_seen(response):
 """ Pfp helper function"""
 def save_picture(app, form_pfp):
     random_hex = token_hex(8)
-    f_name, f_ext = os.path.splitext(form_pfp.filename)
+    f_name, f_ext = path.splitext(form_pfp.filename)
     pfp_fn = random_hex + f_ext
-    pfp_path = os.path.join(app.root_path, 'static/images/pfps', pfp_fn)
+    pfp_path = path.join(app.root_path, 'static/images/pfps', pfp_fn)
     image = Image.open(form_pfp)
     image.thumbnail((360, 360))
     image.save(pfp_path)

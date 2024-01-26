@@ -1,16 +1,7 @@
-from flask_wtf import FlaskForm
-from datetime import date
-from flask_wtf.file import FileField, FileAllowed
-from wtforms import (
-  StringField,   SubmitField,
-  TextAreaField, PasswordField,
-  BooleanField,  DateField, 
-  ValidationError
-)
-from wtforms.validators import (
-  EqualTo, DataRequired,
-  Length,  Regexp
-)
+from flask_wtf          import FlaskForm
+from datetime           import date
+from wtforms            import (StringField, SubmitField, DateField)
+from wtforms.validators import (DataRequired, Length)
 
 
 class TODOForm(FlaskForm):

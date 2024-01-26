@@ -1,12 +1,12 @@
-from . import main
-from ..command_handler import handle_request
-from ..render import render
+from .                  import main
+from ..command_handler  import handle_request
+from ..render           import render
 
 
-from flask import current_app, request
-from datetime import datetime
-from re import compile as re_compile
-from platform import (
+from flask              import current_app, request
+from datetime           import datetime
+from re                 import compile as re_compile
+from platform           import (
     machine   as platform_machine,
     node      as platform_node,
     processor as platform_cpu,

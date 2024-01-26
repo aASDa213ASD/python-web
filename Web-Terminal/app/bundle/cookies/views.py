@@ -1,9 +1,8 @@
-from . import cookies
+from .                 import cookies
 from ..command_handler import handle_request
-from ..render import render
 
-from flask import redirect, render_template, request, session, url_for, make_response
-from flask_jwt_extended import create_access_token
+
+from flask             import redirect, request, url_for, make_response
 
 
 @cookies.route("/setcookie", methods=["GET", "POST"])

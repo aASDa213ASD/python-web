@@ -1,13 +1,11 @@
-from flask_wtf import FlaskForm
-from datetime import date
-from flask_login import current_user
-from .models import User
-from flask_wtf.file import FileField, FileAllowed
-from wtforms import (
+from flask_wtf          import FlaskForm
+from flask_login        import current_user
+from .models            import User
+from flask_wtf.file     import FileField, FileAllowed
+from wtforms            import (
   StringField,   SubmitField,
   TextAreaField, PasswordField,
-  BooleanField,  DateField, 
-  ValidationError
+  BooleanField,  ValidationError
 )
 from wtforms.validators import (
   EqualTo, DataRequired,

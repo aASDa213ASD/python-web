@@ -1,14 +1,9 @@
-from . import feedback
-from ..command_handler import handle_request
+from .        import feedback
+from .models  import Feedback, db
+from .forms   import FeedbackForm
 from ..render import render
 
-
-from flask import flash, redirect, render_template, request, session, url_for, make_response
-from flask_jwt_extended import create_access_token
-from flask_login import login_user, current_user, logout_user, login_required
-
-from .models import Feedback, db
-from .forms import FeedbackForm
+from flask    import flash, redirect, request, url_for
 
 @feedback.route("/feedback", methods=["GET", "POST"])
 def feedback_list():

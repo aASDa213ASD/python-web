@@ -1,14 +1,11 @@
-from . import todo
-from ..command_handler import handle_request
-from ..render import render
+from .           import todo
+from ..render    import render
 
 
-from flask import redirect, render_template, request, session, url_for, make_response
-from flask_jwt_extended import create_access_token
-from flask_login import login_user, current_user, logout_user, login_required
-
-from .models import Todo, db
-from .forms import TODOForm
+from flask       import redirect, request, url_for
+from flask_login import current_user, login_required
+from .models     import Todo, db
+from .forms      import TODOForm
 
 
 @todo.route("/todo", methods=["GET", "POST"])

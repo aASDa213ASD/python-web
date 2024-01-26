@@ -1,9 +1,8 @@
-from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
+from app         import bcrypt
+from app         import login_manager
+from app         import db
 from flask_login import UserMixin
-from app import bcrypt
-from app import login_manager
-from app import db
+
 
 
 @login_manager.user_loader
