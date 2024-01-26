@@ -5,13 +5,18 @@ from flask_migrate      import Migrate
 from flask_login        import LoginManager
 from flask_sqlalchemy   import SQLAlchemy
 from flask_jwt_extended import JWTManager
+import redis
 
-db = SQLAlchemy()
-bcrypt = Bcrypt()
+
+db            = SQLAlchemy()
+migrate       = Migrate()
+bcrypt        = Bcrypt()
 login_manager = LoginManager()
-api_instance = Api()
-jwt = JWTManager()
-migrate = Migrate()
+api_instance  = Api()
+jwt_manager   = JWTManager()
+jwt_blocklist = redis.StrictRedis(
+    host="localhost", port=6379, db=0, decode_responses=True
+)
 
 
 def create_app(config_name: str = "dev"):
@@ -33,23 +38,25 @@ def create_app(config_name: str = "dev"):
     login_manager.login_view = 'accounts.login'
     login_manager.login_message_category = 'info'
     api_instance.init_app(app)
-    jwt.init_app(app)
+    jwt_manager.init_app(app)
 
     with app.app_context():
-        from .bundle.main.views import main
+        from .bundle.main.views     import main
         from .bundle.accounts.views import accounts
-        from .bundle.cookies.views import cookies
+        from .bundle.cookies.views  import cookies
         from .bundle.feedback.views import feedback
-        from .bundle.todo.views import todo
-        from .bundle.posts.views import posts
-        from .bundle.api.views import api
+        from .bundle.todo.views     import todo
+        from .bundle.posts.views    import posts
+        from .bundle.api.todo       import api_todo
+        from .bundle.api.accounts   import api_accounts
 
         app.register_blueprint(main)
         app.register_blueprint(accounts)
         app.register_blueprint(cookies)
         app.register_blueprint(feedback)
         app.register_blueprint(todo)
-        app.register_blueprint(api)
         app.register_blueprint(posts)
+        app.register_blueprint(api_todo)
+        app.register_blueprint(api_accounts)
 
     return app
