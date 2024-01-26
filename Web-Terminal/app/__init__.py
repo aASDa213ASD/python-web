@@ -5,7 +5,7 @@ from flask_migrate      import Migrate
 from flask_login        import LoginManager
 from flask_sqlalchemy   import SQLAlchemy
 from flask_jwt_extended import JWTManager
-import redis
+from redis import StrictRedis
 
 
 db            = SQLAlchemy()
@@ -14,7 +14,7 @@ bcrypt        = Bcrypt()
 login_manager = LoginManager()
 api_instance  = Api()
 jwt_manager   = JWTManager()
-jwt_blocklist = redis.StrictRedis(
+jwt_blocklist = StrictRedis(
     host="localhost", port=6379, db=0, decode_responses=True
 )
 
@@ -49,6 +49,7 @@ def create_app(config_name: str = "dev"):
         from .bundle.posts.views    import posts
         from .bundle.api.todo       import api_todo
         from .bundle.api.accounts   import api_accounts
+        from .bundle.swagger        import swaggerui_blueprint
 
         app.register_blueprint(main)
         app.register_blueprint(accounts)
@@ -58,5 +59,6 @@ def create_app(config_name: str = "dev"):
         app.register_blueprint(posts)
         app.register_blueprint(api_todo)
         app.register_blueprint(api_accounts)
+        app.register_blueprint(swaggerui_blueprint, url_prefix="/swagger")
 
     return app

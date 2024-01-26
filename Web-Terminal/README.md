@@ -1,4 +1,30 @@
-## Flask Web-Terminal Portfolio
+## Flask linux-like terminal
+> # Update 15: <br>
+> <b>- RESTful API for Users CRUD via separate blueprint</b> <br>
+> <b>- Estabilished redis database connection for jwt manager & token revocation</b> <br>
+
+> ## Swagger:
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1200361803708891177/image.png?ex=65c5e70b&is=65b3720b&hm=45c613cadb87c5e10da653879d2044ee9f2900618f9ad1d52b8cb457b9575cd7&" alt="">
+</picture>
+
+> ## Rest of things:
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1200361105340497930/image.png?ex=65c5e665&is=65b37165&hm=e08ad94b4af62cbff4dd3ad9b743334d3d1203296b349489e4bfbc8bd4a526e7&" alt="">
+</picture>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1200361189750882395/image.png?ex=65c5e679&is=65b37179&hm=14e2f1d9d76121f27b31544a94a7f723234bc27c56c99d6f879845967fecfe4e&" alt="">
+</picture>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1200361548032512050/image.png?ex=65c5e6ce&is=65b371ce&hm=412b395c8cbf68a94d34f542abbd28095a956c890a3c8adc20caf845957cbd8b&" alt="">
+</picture>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1200361593746231367/image.png?ex=65c5e6d9&is=65b371d9&hm=770c316a6b76eb5370c6faa074305174c3ca16fe0fb2426e066bfe4b7e66df1c&" alt="">
+</picture>
+<picture>
+ <img src="https://cdn.discordapp.com/attachments/1051467735420370944/1200361656392355901/image.png?ex=65c5e6e8&is=65b371e8&hm=33b6a3de25b80cb03367e8a0bdd4d63c7fe235d393da86d6fc6f51da980838e6&" alt="">
+</picture>
+
 > # Update 14: <br>
 > <b>- JWT token implementation for API of CRUD of Todo items</b> <br>
 > <b>- Estabilished redis database connection for jwt manager & token revocation</b> <br>
