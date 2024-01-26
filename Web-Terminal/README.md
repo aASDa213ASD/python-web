@@ -1,4 +1,8 @@
 ## Flask Web-Terminal Portfolio
+> # Update 12 (Problems arrived): <br>
+> <b>- Test on pytest</b> <br>
+
+
 > # Update 11: <br>
 > <b>- Test on flask_testing and unittest</b> <br>
 <picture>
