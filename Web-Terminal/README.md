@@ -1,4 +1,20 @@
 ## Flask Web-Terminal Portfolio
+> # Update 14: <br>
+> <b>- JWT token implementation for API of CRUD of Todo items</b> <br>
+> <b>- Estabilished redis database connection for jwt manager & token revocation</b> <br>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200352707408560218/image.png?ex=65c5de92&is=65b36992&hm=cd8e3abe4f3473daa022093fba7a53afb9bcd057377b4754a8bd7d5533e44075&=&format=webp&quality=lossless&width=2012&height=934" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200353881331355658/image.png?ex=65c5dfaa&is=65b36aaa&hm=01d9f13eb73b7f5fd097ab9ffd3a14460536aec9a66bd3be97d1a1ac75d60b59&=&format=webp&quality=lossless&width=2364&height=936" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200353945801982002/image.png?ex=65c5dfba&is=65b36aba&hm=a82c9af0978e6024619d79b7522a91ff1bb2ed1104fd357cd3184557be3d4ec4&=&format=webp&quality=lossless&width=2581&height=679" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200354320403677205/image.png?ex=65c5e013&is=65b36b13&hm=ac94f00c399da294d4f8779bf60183aaaca4c933bc1d471f012352cffd90a342&=&format=webp&quality=lossless&width=2290&height=936" alt="">
+</picture>
+
 > # Update 13: <br>
 > <b>- API implementation of CRUD for TODO items</b> <br>
 <picture>
