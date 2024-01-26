@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}List of Posts{% endblock %}
+
+{% block main %}
+<section>
+    <div class="pageSection">
+        <div>
+            <br>
+            <table class="databaseOutputTable">
+                <thead class="databaseOutputTable">
+                    <tr class="databaseOutputTable">
+                        <th class="databaseOutputTable">Category ID</th>
+                        <th class="databaseOutputTable">Category Link</th>
+                    </tr>
+                </thead>
+                <tbody class="databaseOutputTable">
+                    {% for category in categories.items %}
+                        <tr class="databaseOutputTable">
+                            <td class="databaseOutputTable">
+                                {{ category.id }}
+                            </td>
+                            <td class="databaseOutputTable">
+                                <a class="postAnchor" href="{{ url_for('posts.view_category', id=category.id) }}">{{ category.name }}</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="2" class="databaseOutputTable">
+                                <strong>There are no categories</strong>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <div>
+                <a class="arrow arrow-right" href="{{ url_for('posts.create_category') }}"><b>New category</a>
+            </div>
+            <br>
+            <div>
+                <a class="arrow arrow-right" href="{{ url_for('posts.view_posts') }}"><b>List of posts</a>
+            </div>
+
+            <div class="navContainer mt-3" data-bs-theme="dark">
+                <div class="navPagination">
+                    <ul class="pagination">
+                        {% if categories.has_prev %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('posts.view_categories', page=categories.prev_num) }}">Previous</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">Previous</span>
+                        </li>
+                        {% endif %}
+
+                        {% for page_num in categories.iter_pages() %}
+                            {% if page_num %}
+                                {% if categories.page == page_num %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ page_num }}</span>
+                                </li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('posts.view_categories', page=page_num) }}">{{ page_num }}</a>
+                                </li>
+                                {% endif %}
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if categories.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('posts.view_categories', page=categories.next_num) }}">Next</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">Next</span>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

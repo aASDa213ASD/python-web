@@ -40,6 +40,7 @@ def create_app(config_name: str = "dev"):
         from .bundle.feedback.views import feedback
         from .bundle.todo.views import todo
         from .bundle.api.views import api
+        from .bundle.posts.views import posts
 
         app.register_blueprint(main)
         app.register_blueprint(accounts)
@@ -47,5 +48,6 @@ def create_app(config_name: str = "dev"):
         app.register_blueprint(feedback)
         app.register_blueprint(todo)
         app.register_blueprint(api, url_prefix='/api')
+        app.register_blueprint(posts)
 
     return app

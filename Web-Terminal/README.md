@@ -1,4 +1,11 @@
 ## Flask Web-Terminal Portfolio
+> # Update 10 (Have no time to make it pretty): <br>
+> <b>- Made CRUD for post, tags, categories according to task</b> <br>
+> <b>- Migrated db, connected things with each other</b> <br>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200292520995856394/image.png?ex=65c5a685&is=65b33185&hm=6464f9bf51901ba5e21d6897014723bb609dd960a5dbf9dddf99ba99114f8a0b&=&format=webp&quality=lossless&width=1337&height=936" alt="">
+</picture>
+
 > # Update 9: <br>
 > <b>- Refactored to blueprints.</b> <br>
 > <b>- Refactored to use app fabric</b> <br>

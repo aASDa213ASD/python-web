@@ -1,6 +1,6 @@
 // commands.js
 const valid_folders = ["/", "about", "gamehacking", "gallery", "system", "whoami", "feedback", "todo"];
-const valid_commands = ["skills", "whoami", "exit", "cookies", "feedback", "todo", "register", "users"];
+const valid_commands = ["skills", "whoami", "exit", "cookies", "feedback", "todo", "register", "users", "posts"];
 
 function update_caret_position() {
     const textarea = document.getElementById('command_input');

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} Posts {% endblock %}
+
+{% block content %}
+<section>
+    <div class="pageSection">
+        <h2>Category : {{ category.name }}</h2>
+        <br>
+        <h4>Links to the posts with the given category : </h4>
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <a class="arrow arrow-right" href="{{ url_for('posts.view_post', id=post.id) }}"><b>{{ post.title }}</a>
+                </li>
+                {% else %}
+                    <p>
+                        <h5>There are no posts assigned for to this category</h5>
+                    </p>
+            {% endfor %}
+        </ul>
+        <br>
+        <div>
+            <a class="arrow arrow-right" href="{{ url_for('posts.update_category', id=category.id) }}"><b>Update category</a>
+            <br><br>
+            <a href="{{ url_for('posts.delete_category', id=category.id) }}"
+               onclick="return confirm('Are you sure you want to delete this category?');"
+               class="btn btn-danger ms-1">
+                Delete the category
+            </a>
+            <br><br>
+            <a class="arrow arrow-right" href="{{ url_for('posts.view_categories') }}"><b>Category list</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

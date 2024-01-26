@@ -11,12 +11,12 @@ def user_loader(user_id):
 
 
 class User(db.Model, UserMixin):
-  id = db.Column(db.Integer, primary_key=True) 
-  username = db.Column(db.String(50), unique=True, nullable=False)
-  password = db.Column(db.String(60), nullable=False)
-  bio = db.Column(db.String(255))
+  id        = db.Column(db.Integer, primary_key=True) 
+  username  = db.Column(db.String(50), unique=True, nullable=False)
+  password  = db.Column(db.String(60), nullable=False)
+  bio       = db.Column(db.String(255))
   last_seen = db.Column(db.DateTime)
-  pfp = db.Column(db.String(20), nullable=False, default="anonymous.png")
+  pfp       = db.Column(db.String(20), nullable=False, default="anonymous.png")
 
   def __init__(self, username: str, password: str) -> None:
     self.username = username

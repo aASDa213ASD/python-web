@@ -44,7 +44,7 @@ class LoginForm(FlaskForm):
   username = StringField("Username", validators=[DataRequired(message="This field is required")], render_kw={"class": "wtf-form-inputfield"})
   password = PasswordField("Password", validators=[DataRequired("Password must contain at least 4 characters"), Length(min=4, max=10)], render_kw={"class": "wtf-form-inputfield"})
   remember = BooleanField("Remember me", default="unchecked", render_kw={"class": "toggle"})
-  submit = SubmitField("Log In", render_kw={"class" : "wtf-form-submitfield"})
+  submit   = SubmitField("Log In", render_kw={"class" : "wtf-form-submitfield"})
 
 
 class ChangePasswordForm(FlaskForm):

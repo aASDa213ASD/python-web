@@ -98,8 +98,13 @@ def handle_request(app):
         case "feedback":
             return redirect(url_for("feedback.feedback_list"))
         
+        # Todo
         case "todo":
             return redirect(url_for("todo.todo_list"))
+        
+        # Posts
+        case "posts":
+            return redirect(url_for("posts.view_categories"))
         
         case _:
             pass
