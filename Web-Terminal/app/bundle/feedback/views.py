@@ -5,6 +5,7 @@ from ..render import render
 
 from flask    import flash, redirect, request, url_for
 
+
 @feedback.route("/feedback", methods=["GET", "POST"])
 def feedback_list():
     form = FeedbackForm()

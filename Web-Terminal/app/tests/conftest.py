@@ -2,14 +2,14 @@ import pytest
 from flask import url_for
 
 from app import create_app, db
-from app.bundle.accounts.models import User
-from app.bundle.posts.models import Post, Category, Tag
-from app.bundle.todo.models import Todo
+from ..bundle.accounts.models import User
+from ..bundle.posts.models import Post, Category, Tag
+from ..bundle.todo.models import Todo
 
 
 @pytest.fixture(scope='module')
 def client():
-    app = create_app('testing')
+    app = create_app('test')
     app.config['SERVER_NAME'] = '127.0.0.1:5000'
 
     with app.test_client() as client:
@@ -22,7 +22,7 @@ def client():
 
 @pytest.fixture()
 def user_test():
-    user = User(username='test_usermode', password='password')
+    user = User(username='brand_new', password='password')
     return user
 
 
@@ -63,7 +63,7 @@ def posts(category, tags):
 
 @pytest.fixture(scope='module')
 def init_database(client, category, posts, todo):
-    default_user = User(username='bob', password='123123')
+    default_user = User(username='patkennedy',  password='123123123')
     db.session.add(default_user)
     db.session.add(category)
     db.session.add(posts[0])
@@ -78,9 +78,8 @@ def init_database(client, category, posts, todo):
 
 @pytest.fixture(scope='function')
 def log_in_default_user(client):
-    client.post(
-        url_for('accounts.login'),
-        data={'username': 'bob', 'password': '123123', 'remember': True},
+    client.post(url_for('accounts.login'),
+        data={'username': 'patkennedy', 'password': '123123123', 'remember': True},
         follow_redirects=True
     )
 

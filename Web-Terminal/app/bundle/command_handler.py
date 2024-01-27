@@ -2,15 +2,6 @@ from flask       import redirect, request, url_for
 from flask_login import current_user, logout_user
 
 
-"""
-Some render help function:
-----------------------------------------------
-from flask import render_template
-
-def render(template: str, **kwargs):
-    return render_template(template, **kwargs)
-"""
-
 def handle_request(app):
     """
     Handles the POST request.
@@ -24,8 +15,6 @@ def handle_request(app):
     """
     
     routes = [r.endpoint for r in app.url_map.iter_rules() if r.endpoint != 'static']
-    print(f"[Command handler] Available routes: {routes}")
-
     requested_command = request.form["command"]
     arguments = requested_command.split()
     command = arguments[0]
@@ -84,6 +73,7 @@ def handle_request(app):
             return redirect(url_for("accounts.users"))
         
         # Cookies
+        # Basic usage: cookies set <key> <value> / cookies wipe
         case "cookies":
             if len(arguments) >= 2:
                 if len(arguments) == 4 and arguments[1] == "set":

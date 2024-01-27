@@ -5,13 +5,15 @@ from flask_migrate      import Migrate
 from flask_login        import LoginManager
 from flask_sqlalchemy   import SQLAlchemy
 from flask_jwt_extended import JWTManager
-from redis import StrictRedis
+from redis              import StrictRedis
 
 
 db            = SQLAlchemy()
 migrate       = Migrate()
 bcrypt        = Bcrypt()
 login_manager = LoginManager()
+login_manager.login_view = 'accounts.login'
+login_manager.login_message_category = 'info'
 api_instance  = Api()
 jwt_manager   = JWTManager()
 jwt_blocklist = StrictRedis(
@@ -19,24 +21,23 @@ jwt_blocklist = StrictRedis(
 )
 
 
-def create_app(config_name: str = "dev"):
+def create_app(config_name: str = "prod"):
     app = Flask(__name__)
     
-    from config import Development, Production, Testing
+    from config import Development, Production, Test
 
-    if config_name == "prod":
-        app.config.from_object(Production)
-    elif config_name == "test":
-        app.config.from_object(Testing)
-    else:
-        app.config.from_object(Development)
+    match(config_name):
+        case "prod":
+            app.config.from_object(Production)
+        case "dev":
+            app.config.from_object(Development)
+        case "test":
+            app.config.from_object(Test) 
 
     db.init_app(app)
     migrate.init_app(app, db)
     bcrypt.init_app(app)
     login_manager.init_app(app)
-    login_manager.login_view = 'accounts.login'
-    login_manager.login_message_category = 'info'
     api_instance.init_app(app)
     jwt_manager.init_app(app)
 
