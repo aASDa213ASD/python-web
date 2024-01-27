@@ -36,7 +36,6 @@ def category():
 def todo():
     todo_1 = Todo(title="Todo 1", description="Todo description 1", status=False)
     todo_2 = Todo(title="Todo 2", description="Todo description 2", status=False)
-
     todo_list = [todo_1, todo_2]
 
     yield todo_list
@@ -46,7 +45,6 @@ def todo():
 def tags():
     tag_1 = Tag(name="Tag 1")
     tag_2 = Tag(name="Tag 2")
-
     tags = [tag_1, tag_2]
 
     yield tags
@@ -54,8 +52,8 @@ def tags():
 
 @pytest.fixture(scope='module')
 def posts(category, tags):
-    post_1 = Post(title="Um consequatur volupta", text='Qui deleniti voluptas', user_id=1, category=category, tags=tags)
-    post_2 = Post(title="Optio eum rerum", text='Cumque qui omnis voluptatem.', user_id=1, category=category, tags=tags)
+    post_1 = Post(title="Example", text='Example', user_id=1, category=category, tags=tags)
+    post_2 = Post(title="Example", text='Example', user_id=1, category=category, tags=tags)
 
     posts = [post_1, post_2]
     yield posts
@@ -70,9 +68,7 @@ def init_database(client, category, posts, todo):
     db.session.add(posts[1])
     db.session.add(todo[0])
     db.session.add(todo[1])
-
     db.session.commit()
-
     yield
 
 

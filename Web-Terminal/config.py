@@ -30,5 +30,5 @@ class Production(Configuration):
 class Test(Configuration):
     TESTING = True
     DEBUG   = True
-    #SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
     WTF_CSRF_ENABLED = False

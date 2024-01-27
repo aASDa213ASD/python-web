@@ -69,7 +69,13 @@
 </picture>
 
 > # Update 12 (Problems arrived): <br>
-> <b>- Test on pytest</b> <br>
+> <b>- Test on pytest, HTML coverage report</b> <br>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200638503722164255/image.png?ex=65c6e8be&is=65b473be&hm=30fe25a62201e9a7ba59913035c9a46dd52a7c67943c2c45ef1ae6beee6e4e38&=&format=webp&quality=lossless&width=1620&height=936" alt="">
+</picture>
+<picture>
+ <img src="https://media.discordapp.net/attachments/1051467735420370944/1200637632934326292/image.png?ex=65c6e7ee&is=65b472ee&hm=fadb9c42971e449a6eb0b9a4bf3dcdede058a5a87a164822700f9364a615dfb9&=&format=webp&quality=lossless&width=2581&height=855" alt="">
+</picture>
 
 > # Update 11: <br>
 > <b>- Test on flask_testing and unittest</b> <br>
